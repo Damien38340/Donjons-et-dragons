@@ -4,7 +4,8 @@ public class Character {
     private String type;
     private int hp;
     private int attack;
-
+    private OffensiveGear offensiveGear;
+    private DefensiveGear defensiveGear;
 
     public Character() {
         this("");
@@ -20,9 +21,13 @@ public class Character {
         if (type.equals("Warrior")) {
             this.hp = 10;
             this.attack = 10;
+            this.offensiveGear = new OffensiveGear("Weapon", "Wooden Sword",1);
+            this.defensiveGear = new DefensiveGear("Shield", "Kokiri Shield", 1);
         } else {
             this.hp = 6;
             this.attack = 15;
+            this.offensiveGear = new OffensiveGear("Spell", "Taylor Swift",1);
+            this.defensiveGear = new DefensiveGear("Potion", "Water", 1);
         }
     }
 
@@ -35,7 +40,6 @@ public class Character {
     }
 
     public String toString() {
-        return "name: " + name + "\ntype: " + type + "\nhp: " + hp + "\nattack: " + attack;
+        return "name: " + name + "\ntype: " + type + "\nhp: " + hp + "\nattack: " + attack + "\n\n" + offensiveGear + "\n" + defensiveGear;
     }
-
 }

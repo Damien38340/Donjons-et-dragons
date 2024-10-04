@@ -16,9 +16,10 @@ public class Menu {
     }
 
     public String showCharacterMenu() {
-        System.out.println("1. Character information");
-        System.out.println("2. Edit information");
-        System.out.println("3. Exit");
+        System.out.println("1. Play");
+        System.out.println("2. Character information");
+        System.out.println("3. Edit information");
+        System.out.println("4. Exit");
 
         return sc.nextLine();
     }
