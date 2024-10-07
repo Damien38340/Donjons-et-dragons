@@ -22,7 +22,12 @@ public class Game {
 
         String type = menu.askingType();
 
-        player = new Character(userName, type);
+        if (type.equals("Warrior")){
+            player = new Warrior(userName, type);
+        }
+        else {
+            player = new Wizard(userName, type);
+        }
 
         menu.showTypeAnswers(type);
 

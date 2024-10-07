@@ -1,4 +1,4 @@
-public class Character {
+abstract class Character {
 
     private String name;
     private String type;
@@ -18,17 +18,38 @@ public class Character {
     public Character(String name, String type) {
         this.name = name;
         this.type = type;
-        if (type.equals("Warrior")) {
-            this.hp = 10;
-            this.attack = 10;
-            this.offensiveGear = new OffensiveGear("Weapon", "Wooden Sword", 1);
-            this.defensiveGear = new DefensiveGear("Shield", "Kokiri Shield", 1);
-        } else {
-            this.hp = 6;
-            this.attack = 15;
-            this.offensiveGear = new OffensiveGear("Spell", "Taylor Swift", 1);
-            this.defensiveGear = new DefensiveGear("Potion", "Water", 1);
-        }
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public OffensiveGear getOffensiveGear() {
+        return offensiveGear;
+    }
+
+    public void setOffensiveGear(OffensiveGear offensiveGear) {
+        this.offensiveGear = offensiveGear;
+    }
+
+    public DefensiveGear getDefensiveGear() {
+        return defensiveGear;
+    }
+
+    public void setDefensiveGear(DefensiveGear defensiveGear) {
+        this.defensiveGear = defensiveGear;
     }
 
     public String getName() {
@@ -45,21 +66,7 @@ public class Character {
 
     public void setType(String newType) {
         this.type = newType;
-        updateGear();
-    }
 
-    private void updateGear() {
-        if (type.equals("Warrior")) {
-            this.hp = 10;
-            this.attack = 10;
-            this.offensiveGear = new OffensiveGear("Weapon", "Wooden Sword", 1);
-            this.defensiveGear = new DefensiveGear("Shield", "Kokiri Shield", 1);
-        } else {
-            this.hp = 6;
-            this.attack = 15;
-            this.offensiveGear = new OffensiveGear("Spell", "Taylor Swift", 1);
-            this.defensiveGear = new DefensiveGear("Potion", "Water", 1);
-        }
     }
 
     public String toString() {

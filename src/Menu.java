@@ -30,6 +30,8 @@ public class Menu {
         } else if (mainMenu.equals("2")) {
             System.out.println("See you around!");
             System.exit(0);
+        } else {
+            defaultMessage();
         }
         return sc.nextLine();  // Read user input
     }
@@ -45,7 +47,7 @@ public class Menu {
         } else if (type.equals("Warrior")) {
             System.out.println("a " + type + " ? You don't look that strong");
         } else {
-            System.out.println("I did not get your answer");
+            System.out.println("A whaaaat ?? I did not get your answer, you'll be what I decide you to be");
         }
     }
 
@@ -79,10 +81,19 @@ public class Menu {
             case "2":
                 String newType = showEditType();
                 newCharacter.setType(newType);
+                if (newType.equals("Warrior")){
+                    newCharacter = new Warrior(newCharacter.getName(), newType);
+                }
+                else {
+                    newCharacter = new Wizard(newCharacter.getName(), newType);
+                }
                 break;
 
             case "3":
                 showCharacterMenu();
+                break;
+            default:
+                defaultMessage();
                 break;
         }
     }

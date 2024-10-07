@@ -1,13 +1,11 @@
-public class DefensiveGear {
+abstract class DefensiveGear {
 
     private String type;
     private String name;
     private int defense;
 
-    public DefensiveGear(String type, String name, int defense) {
-        this.type = type;
-        this.name = name;
-        this.defense = defense;
+    public DefensiveGear() {
+
     }
 
     public String getType() {
