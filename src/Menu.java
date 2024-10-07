@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Menu {
+
     private Scanner sc;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_CYAN = "\u001B[36m";
@@ -58,38 +59,6 @@ public class Menu {
         return sc.nextLine();
     }
 
-    public void showCharacterMenuChoice(String choice, Character newCharacter) {
-        boolean exit = false;
-        while (!exit) {
-            switch (choice) {
-                case "1":
-                    //start a new game
-                    Game game = new Game(board, newCharacter, newCharacter.getName());
-                    game.play();
-                    break;
-                case "2":
-                    //show information
-                    System.out.println(newCharacter);
-                    break;
-
-                case "3":
-                    //edit information
-                    String CharacterEditionMenuChoice = showCharacterEditionMenu();
-                    showEditionMenuChoice(CharacterEditionMenuChoice, newCharacter);
-                    break;
-
-                case "4":
-                    //exit
-                    exit = true;
-                    System.out.println("See you around!");
-                    break;
-            }
-            if (!exit) {
-                choice = showCharacterMenu();
-
-            }
-        }
-    }
 
     public String showCharacterEditionMenu() {
         System.out.println("What would you like to change ?\n");
@@ -116,6 +85,15 @@ public class Menu {
                 showCharacterMenu();
                 break;
         }
+    }
+
+    public void exitMessage() {
+        System.out.println("See you around!");
+    }
+
+    public void defaultMessage() {
+        System.out.println("Invalid choice, please select a valid option.");
+
     }
 
     public String showEditName() {

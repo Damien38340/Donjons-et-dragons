@@ -1,16 +1,71 @@
-import javax.xml.namespace.QName;
 
 public class Game {
 
-    int[] board;
-    Character player;
-    int positionPlayer;
-    String playerName;
+    private int[] board;
+    private Character player;
+    private int positionPlayer;
+    private Menu menu;
 
-    public Game(int[] board, Character player, String playerName) {
-        this.board = board;
-        this.player = player;
-        this.playerName = player.getName();
+    public Game() {
+        this.board = new int[64];
+        this.positionPlayer = 1;
+    }
+
+    public void initGame() {
+        menu = new Menu();
+
+        String mainMenu = menu.showMainMenu();
+
+        String userName = menu.askingName(mainMenu);
+
+        menu.showMessageStrangeName(userName);
+
+        String type = menu.askingType();
+
+        player = new Character(userName, type);
+
+        menu.showTypeAnswers(type);
+
+        String characterMenuChoice = menu.showCharacterMenu();
+
+        showCharacterMenuChoice(characterMenuChoice, player);
+
+    }
+
+    public void showCharacterMenuChoice(String choice, Character newCharacter) {
+        boolean exit = false;
+        while (!exit) {
+            switch (choice) {
+                case "1":
+                    //start a new game
+                    play();
+                    break;
+                case "2":
+                    //show information
+                    System.out.println(newCharacter);
+                    break;
+
+                case "3":
+                    //edit information
+                    String CharacterEditionMenuChoice = menu.showCharacterEditionMenu();
+                    menu.showEditionMenuChoice(CharacterEditionMenuChoice, newCharacter);
+                    break;
+
+                case "4":
+                    //exit
+                    exit = true;
+                    menu.exitMessage();
+                    break;
+
+                default:
+                    menu.defaultMessage();
+                    break;
+            }
+            if (!exit) {
+                choice = menu.showCharacterMenu();
+
+            }
+        }
     }
 
     public int dice() {
@@ -18,19 +73,14 @@ public class Game {
     }
 
     public void play() {
-        positionPlayer = 1;
-        board = new int[64];
         while (positionPlayer < board.length) {
             int roll = dice();
             positionPlayer += roll;
-            System.out.println(positionPlayer);
             if (positionPlayer > board.length) {
-                int numberLeft = positionPlayer - board.length;
-                positionPlayer = board.length - numberLeft;
-                System.out.println(positionPlayer);
+                positionPlayer = board.length;
             }
+            System.out.println(positionPlayer);
         }
-        System.out.println("Well done " + playerName + "! I did not believe in you but you're the proof that anything can happen");
+        System.out.println("Well done " + player.getName() + "! I did not believe in you but you're the proof that anything can happen");
     }
-
 }
