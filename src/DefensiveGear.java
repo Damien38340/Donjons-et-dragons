@@ -34,6 +34,6 @@ public class DefensiveGear {
         this.defense = defense;
     }
     public String toString() {
-        return type + " : " + name + " (defense + " + defense + ")";
+        return type + " : " + name + " (\uD83E\uDD94 defense + " + defense + ")";
     }
 }

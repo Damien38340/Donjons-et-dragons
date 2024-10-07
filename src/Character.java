@@ -32,7 +32,7 @@ public class Character {
     }
 
     public String getName() {
-       return this.name = name;
+        return this.name = name;
     }
 
     public void setName(String newName) {
@@ -45,6 +45,21 @@ public class Character {
 
     public void setType(String newType) {
         this.type = newType;
+        updateGear();
+    }
+
+    private void updateGear() {
+        if (type.equals("Warrior")) {
+            this.hp = 10;
+            this.attack = 10;
+            this.offensiveGear = new OffensiveGear("Weapon", "Wooden Sword", 1);
+            this.defensiveGear = new DefensiveGear("Shield", "Kokiri Shield", 1);
+        } else {
+            this.hp = 6;
+            this.attack = 15;
+            this.offensiveGear = new OffensiveGear("Spell", "Taylor Swift", 1);
+            this.defensiveGear = new DefensiveGear("Potion", "Water", 1);
+        }
     }
 
     public String toString() {

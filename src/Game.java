@@ -19,17 +19,16 @@ public class Game {
 
     public void play() {
         positionPlayer = 1;
-
-        while (positionPlayer < 64) {
+        board = new int[64];
+        while (positionPlayer < board.length) {
             int roll = dice();
             positionPlayer += roll;
             System.out.println(positionPlayer);
-           if(positionPlayer > 64){
-               positionPlayer = positionPlayer - roll;
-                positionPlayer += roll;
+            if (positionPlayer > board.length) {
+                int numberLeft = positionPlayer - board.length;
+                positionPlayer = board.length - numberLeft;
                 System.out.println(positionPlayer);
             }
-
         }
         System.out.println("Well done " + playerName + "! I did not believe in you but you're the proof that anything can happen");
     }

@@ -34,6 +34,6 @@ public class OffensiveGear {
         this.attack = attack;
     }
     public String toString() {
-        return type + " : " + name + " (attack + " + attack + ")";
+        return type + " : " + name + " (\uD83D\uDC3B attack + " + attack + ")";
     }
 }

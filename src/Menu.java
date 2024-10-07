@@ -84,7 +84,7 @@ public class Menu {
                     System.out.println("See you around!");
                     break;
             }
-            if (!exit){
+            if (!exit) {
                 choice = showCharacterMenu();
 
             }
@@ -115,7 +115,6 @@ public class Menu {
             case "3":
                 showCharacterMenu();
                 break;
-
         }
     }
 
