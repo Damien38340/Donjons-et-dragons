@@ -1,4 +1,6 @@
-public class Wizard  extends Character{
+package Characters;
+
+public class Wizard  extends Character {
 
 
     public Wizard(String name, String type) {

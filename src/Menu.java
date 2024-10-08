@@ -1,3 +1,5 @@
+import Characters.Character;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -24,7 +26,7 @@ public class Menu {
     }
 
     public String askingName() {
-            System.out.println("What's your" + ANSI_CYAN + " name" + ANSI_RESET + "?");
+        System.out.println("What's your" + ANSI_CYAN + " name" + ANSI_RESET + "?");
 
         return sc.nextLine();  // Read user input
     }
@@ -35,9 +37,9 @@ public class Menu {
     }
 
     public void showTypeAnswers(String type) {
-        if (type.equals("Wizard")) {
+        if (type.equals("Characters.Wizard")) {
             System.out.println("Oh I see... You want to be the new Harry Potter");
-        } else if (type.equals("Warrior")) {
+        } else if (type.equals("Characters.Warrior")) {
             System.out.println("a " + type + " ? You don't look that strong");
         } else {
             System.out.println("A whaaaat ?? I did not get your answer, you'll be what I decide you to be");
@@ -46,7 +48,7 @@ public class Menu {
 
     public String showCharacterMenu() {
         System.out.println("1. Play");
-        System.out.println("2. Character information");
+        System.out.println("2. Characters.Character information");
         System.out.println("3. Edit information");
         System.out.println("4. Exit");
 
@@ -85,6 +87,14 @@ public class Menu {
 
     public void showPlayerInfo(Character character) {
         System.out.println(character);
+    }
+
+    public void victoryMessage(Character character) {
+        System.out.println("Well done " + character.getName() + "! I did not believe in you but you're the proof that anything can happen");
+    }
+
+    public void defeatMessage() {
+        System.out.println("I knew you would not make it!");
     }
 
 }

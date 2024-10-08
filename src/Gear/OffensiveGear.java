@@ -1,3 +1,5 @@
+package Gear;
+
 public abstract class OffensiveGear {
 
     protected String type;

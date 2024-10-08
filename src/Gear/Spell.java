@@ -1,9 +1,11 @@
+package Gear;
+
 public class Spell extends OffensiveGear {
 
 
 
     public Spell() {
-        super("Spell", "Abra cadavra", 1);
+        super("Gear.Spell", "Abra cadavra", 1);
 
     }
 }
