@@ -1,10 +1,7 @@
 public class Potion extends DefensiveGear{
 
     public Potion() {
-        super();
-        this.setType("Potion");
-        this.setName("Water");
-        this.setDefense(1);
+        super("Potion", "Water", 1);
     }
 
 }

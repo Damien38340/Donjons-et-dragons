@@ -14,63 +14,99 @@ public class Game {
     public void initGame() {
         menu = new Menu();
 
-        String mainMenu = menu.showMainMenu();
+        mainMenu();
+    }
 
-        String userName = menu.askingName(mainMenu);
+    public void mainMenu() {
+        String mainMenuChoice = menu.showMainMenu();
+
+        if (mainMenuChoice.equals("1")) {
+            createNewCharacter();
+        } else if (mainMenuChoice.equals("2")) {
+            exitGame();
+        } else {
+            menu.defaultMessage();
+            mainMenu();
+        }
+    }
+
+    public void exitGame() {
+        menu.exitMessage();
+        System.exit(0);
+    }
+
+    public void createNewCharacter() {
+
+        String userName = menu.askingName();
 
         menu.showMessageStrangeName(userName);
 
         String type = menu.askingType();
 
-        if (type.equals("Warrior")){
+        if (type.equals("Warrior")) {
             player = new Warrior(userName, type);
-        }
-        else {
+        } else {
             player = new Wizard(userName, type);
         }
-
         menu.showTypeAnswers(type);
-
-        String characterMenuChoice = menu.showCharacterMenu();
-
-        showCharacterMenuChoice(characterMenuChoice, player);
-
+        showCharacterMenu();
     }
 
-    public void showCharacterMenuChoice(String choice, Character newCharacter) {
-        boolean exit = false;
-        while (!exit) {
-            switch (choice) {
-                case "1":
-                    //start a new game
-                    play();
-                    break;
-                case "2":
-                    //show information
-                    System.out.println(newCharacter);
-                    break;
+    private Character editCharacter(Character character) {
+        String choice = menu.showCharacterEditionMenu();
 
-                case "3":
-                    //edit information
-                    String CharacterEditionMenuChoice = menu.showCharacterEditionMenu();
-                    menu.showEditionMenuChoice(CharacterEditionMenuChoice, newCharacter);
-                    break;
+        switch (choice) {
+            case "1":
+                String newName = menu.editName();
+                character.setName(newName);
+                break;
 
-                case "4":
-                    //exit
-                    exit = true;
-                    menu.exitMessage();
-                    break;
-
-                default:
-                    menu.defaultMessage();
-                    break;
-            }
-            if (!exit) {
-                choice = menu.showCharacterMenu();
-
-            }
+            case "2":
+                String newType = menu.editType();
+                if (newType.equals("Warrior")) {
+                    character = new Warrior(character.getName(), newType);
+                } else {
+                    character = new Wizard(character.getName(), newType);
+                }
+                break;
+            case "3":
+                showCharacterMenu();
+                break;
+            default:
+                menu.defaultMessage();
+                break;
         }
+        return character;
+    }
+
+    public void showCharacterMenu() {
+        String choice = menu.showCharacterMenu();
+
+        switch (choice) {
+            case "1":
+                //start a new game
+                play();
+                break;
+            case "2":
+                //show information
+                menu.showPlayerInfo(player);
+                break;
+
+            case "3":
+                //edit information
+                player = editCharacter(player);
+                break;
+
+            case "4":
+                //exit
+                exitGame();
+                break;
+
+            default:
+                menu.defaultMessage();
+                break;
+        }
+        showCharacterMenu();
     }
 
     public int dice() {

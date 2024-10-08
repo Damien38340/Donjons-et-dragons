@@ -8,6 +8,4 @@ public class Warrior extends Character {
         this.setOffensiveGear(new Weapon());
         this.setDefensiveGear(new Shield());
     }
-
-
 }

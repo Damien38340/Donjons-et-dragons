@@ -1,7 +1,7 @@
-abstract class Character {
+public abstract class Character {
 
-    private String name;
-    private String type;
+    protected String name;
+    protected String type;
     private int hp;
     private int attack;
     private OffensiveGear offensiveGear;

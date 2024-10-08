@@ -6,7 +6,6 @@ public class Menu {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_PURPLE = "\u001B[35m";
-    public static int[] board;
 
     public Menu() {
         sc = new Scanner(System.in);
@@ -24,15 +23,9 @@ public class Menu {
         System.out.println(name + "? What a strange" + ANSI_CYAN + " name" + ANSI_RESET);  // Output user input
     }
 
-    public String askingName(String mainMenu) {
-        if (mainMenu.equals("1")) {
+    public String askingName() {
             System.out.println("What's your" + ANSI_CYAN + " name" + ANSI_RESET + "?");
-        } else if (mainMenu.equals("2")) {
-            System.out.println("See you around!");
-            System.exit(0);
-        } else {
-            defaultMessage();
-        }
+
         return sc.nextLine();  // Read user input
     }
 
@@ -71,33 +64,6 @@ public class Menu {
         return sc.nextLine();
     }
 
-    public void showEditionMenuChoice(String choice, Character newCharacter) {
-        switch (choice) {
-            case "1":
-                String newName = showEditName();
-                newCharacter.setName(newName);
-                break;
-
-            case "2":
-                String newType = showEditType();
-                newCharacter.setType(newType);
-                if (newType.equals("Warrior")){
-                    newCharacter = new Warrior(newCharacter.getName(), newType);
-                }
-                else {
-                    newCharacter = new Wizard(newCharacter.getName(), newType);
-                }
-                break;
-
-            case "3":
-                showCharacterMenu();
-                break;
-            default:
-                defaultMessage();
-                break;
-        }
-    }
-
     public void exitMessage() {
         System.out.println("See you around!");
     }
@@ -107,14 +73,18 @@ public class Menu {
 
     }
 
-    public String showEditName() {
+    public String editName() {
         System.out.println("Can you say that name again ?");
         return sc.nextLine();
     }
 
-    public String showEditType() {
+    public String editType() {
         System.out.println("Can you say that type again ?");
         return sc.nextLine();
+    }
+
+    public void showPlayerInfo(Character character) {
+        System.out.println(character);
     }
 
 }
