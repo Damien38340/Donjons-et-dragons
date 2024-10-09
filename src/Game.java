@@ -1,16 +1,16 @@
 
+import Board.Board;
 import Characters.Character;
 import Characters.Warrior;
 import Characters.Wizard;
 
-import java.util.ArrayList;
 
 public class Game {
 
-    private ArrayList<Case> board;
     private Character player;
-    private int positionPlayer;
+    private int playerPosition;
     private Menu menu;
+    private Board board;
 
     public Game() {
 
@@ -48,7 +48,7 @@ public class Game {
 
         String type = menu.askingType();
 
-        if (type.equals("Characters.Warrior")) {
+        if (type.equals("Warrior")) {
             player = new Warrior(userName, type);
         } else {
             player = new Wizard(userName, type);
@@ -68,7 +68,7 @@ public class Game {
 
             case "2":
                 String newType = menu.editType();
-                if (newType.equals("Characters.Warrior")) {
+                if (newType.equals("Warrior")) {
                     character = new Warrior(character.getName(), newType);
                 } else {
                     character = new Wizard(character.getName(), newType);
@@ -115,27 +115,25 @@ public class Game {
     }
 
     public int dice() {
-        return (int) (Math.random() * 6 + 1);
+        return (int) (Math.random() * 1 + 1);
     }
 
     public void play() {
-        positionPlayer = 1;
-        board = new ArrayList<Case>(65);
-
-        for (Case c : board) {
-            board.add(c);
-        }
+        playerPosition = 1;
+        board = new Board();
 
         try {
-            while (positionPlayer < board.size() - 1) {
+            while (playerPosition < board.getBoardSize()) {
+                menu.rollTheDice(player.getName());
                 int roll = dice();
-                positionPlayer += roll;
-                System.out.println(positionPlayer);
+                playerPosition += roll;
+                menu.rollScore(roll);
+                menu.playerPosition(playerPosition);
             }
         } catch (Exception e) {
             System.out.println("Player out of bounds !!");
         }
-        if (positionPlayer == board.size() - 1) {
+        if (playerPosition == board.getBoardSize()) {
             menu.victoryMessage(player);
         } else {
             menu.defeatMessage();

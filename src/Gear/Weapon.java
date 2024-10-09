@@ -1,11 +1,11 @@
-package Gear;//import Case.*;
+package Gear;
 
 public class Weapon extends OffensiveGear {
 
 
 public Weapon() {
 
-    super("Gear.Weapon", "Wooden Sword", 1);
+    super("Weapon", "Wooden Sword", 1);
 
 
 }

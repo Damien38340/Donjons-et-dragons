@@ -1,5 +1,8 @@
 package Characters;
 
+import Gear.Potion;
+import Gear.Spell;
+
 public class Wizard  extends Character {
 
 

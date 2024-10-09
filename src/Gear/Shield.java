@@ -4,7 +4,7 @@ public class Shield extends DefensiveGear {
 
     public Shield() {
 
-        super("Gear.Shield", "Kokiri Gear.Shield", 1);
+        super("Shield", "Kokiri Shield", 1);
 
     }
 }

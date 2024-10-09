@@ -1,5 +1,9 @@
 package Characters;
 
+import Gear.DefensiveGear;
+import Gear.OffensiveGear;
+
+
 public abstract class Character {
 
     protected String name;

@@ -1,5 +1,8 @@
 package Characters;
 
+import Gear.Shield;
+import Gear.Weapon;
+
 public class Warrior extends Character {
 
 
