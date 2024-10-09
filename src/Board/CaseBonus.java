@@ -1,4 +1,19 @@
 package Board;
 
-public class CaseBonus implements Case{
+import Characters.Hero;
+
+public abstract class CaseBonus implements Case {
+
+    String name;
+    int level;
+
+    protected CaseBonus(String name, int level) {
+        this.name = name;
+        this.level = level;
+    }
+
+    @Override
+public void fight(Hero character){
+
+}
 }

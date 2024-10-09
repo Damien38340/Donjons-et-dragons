@@ -1,4 +1,4 @@
-import Characters.Character;
+import Characters.Hero;
 
 import java.util.Scanner;
 
@@ -8,6 +8,8 @@ public class Menu {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RED = "\u001B[31m";
 
     public Menu() {
         sc = new Scanner(System.in);
@@ -22,13 +24,13 @@ public class Menu {
     }
 
     public void showMessageStrangeName(String name) {
-        System.out.println(ANSI_CYAN + name + ANSI_RESET + "? What a strange" + ANSI_CYAN + " name" + ANSI_RESET);
+        System.out.println("\n" + ANSI_CYAN + name + ANSI_RESET + "? What a strange" + ANSI_CYAN + " name" + ANSI_RESET);
     }
 
     public String askingName() {
         System.out.println("\n What's your" + ANSI_CYAN + " name" + ANSI_RESET + "?");
 
-        return sc.nextLine();  // Read user input
+        return sc.nextLine();
     }
 
     public String askingType() {
@@ -38,7 +40,7 @@ public class Menu {
 
     public void showTypeAnswers(String type) {
         if (type.equals("Wizard")) {
-            System.out.println("\n Oh I see... You want to be the new Harry Potter");
+            System.out.println("\n Oh I see... You want to be the next Harry Potter");
         } else if (type.equals("Warrior")) {
             System.out.println("\n A " + type + " ? You don't look that strong");
         } else {
@@ -47,7 +49,7 @@ public class Menu {
     }
 
     public String showCharacterMenu() {
-        System.out.println("\n 1. Play");
+        System.out.println("1. Play");
         System.out.println("2. Character information");
         System.out.println("3. Edit information");
         System.out.println("4. Exit");
@@ -67,7 +69,7 @@ public class Menu {
     }
 
     public String rollTheDice(String name) {
-        System.out.println("\r\n Press enter to roll the dice Señor " + ANSI_CYAN + name + ANSI_RESET);
+        System.out.println("\r\n Press" + ANSI_BLUE + " enter" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (or press" + ANSI_RED + " 1" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
         return sc.nextLine();
     }
         public void rollScore ( int roll){
@@ -96,12 +98,12 @@ public class Menu {
         return sc.nextLine();
     }
 
-    public void showPlayerInfo(Character character) {
-        System.out.println(character);
+    public void showPlayerInfo(Hero hero) {
+        System.out.println(hero);
     }
 
-    public void victoryMessage(Character character) {
-        System.out.println("\n \uD83C\uDF89 Well done " + ANSI_CYAN + character.getName() + ANSI_RESET + "! I did not believe in you but you're the proof that anything can happen \uD83C\uDF87");
+    public void victoryMessage(Hero hero) {
+        System.out.println("\n \uD83C\uDF89 Well done " + ANSI_CYAN + hero.getName() + ANSI_RESET + "! I did not believe in you but you're the proof that anything can happen \uD83C\uDF87");
     }
 
     public void defeatMessage() {

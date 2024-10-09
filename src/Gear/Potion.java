@@ -2,8 +2,8 @@ package Gear;
 
 public class Potion extends DefensiveGear {
 
-    public Potion() {
-        super("Potion", "Water", 1);
+    public Potion(String name, int defense) {
+        super(name, defense);
     }
 
 }

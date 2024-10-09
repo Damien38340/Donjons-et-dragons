@@ -4,7 +4,7 @@ import Gear.DefensiveGear;
 import Gear.OffensiveGear;
 
 
-public abstract class Character {
+public abstract class Hero {
 
     protected String name;
     protected String type;
@@ -13,15 +13,15 @@ public abstract class Character {
     private OffensiveGear offensiveGear;
     private DefensiveGear defensiveGear;
 
-    public Character() {
+    public Hero() {
         this("");
     }
 
-    public Character(String name) {
+    public Hero(String name) {
         this(name, "");
     }
 
-    public Character(String name, String type) {
+    public Hero(String name, String type) {
         this.name = name;
         this.type = type;
     }

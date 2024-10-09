@@ -1,16 +1,11 @@
 package Characters;
 
-import Gear.Shield;
-import Gear.Weapon;
-
-public class Warrior extends Character {
+public class Warrior extends Hero {
 
 
     public Warrior(String name, String type) {
         super(name, type);
         this.setHp(10);
         this.setAttack(10);
-        this.setOffensiveGear(new Weapon());
-        this.setDefensiveGear(new Shield());
     }
 }

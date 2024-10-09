@@ -2,10 +2,7 @@ package Gear;
 
 public class Spell extends OffensiveGear {
 
-
-
-    public Spell() {
-        super("Spell", "Abra cadavra", 1);
-
+    public Spell(String name, int attack) {
+        super(name, attack);
     }
 }

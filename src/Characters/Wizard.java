@@ -1,16 +1,11 @@
 package Characters;
 
-import Gear.Potion;
-import Gear.Spell;
-
-public class Wizard  extends Character {
+public class Wizard  extends Hero {
 
 
     public Wizard(String name, String type) {
         super(name, type);
         this.setHp(6);
         this.setAttack(15);
-        this.setOffensiveGear(new Spell());
-        this.setDefensiveGear(new Potion());
     }
 }

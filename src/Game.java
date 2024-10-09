@@ -1,13 +1,13 @@
 
 import Board.Board;
-import Characters.Character;
+import Characters.Hero;
 import Characters.Warrior;
 import Characters.Wizard;
 
 
 public class Game {
 
-    private Character player;
+    private Hero player;
     private int playerPosition;
     private Menu menu;
     private Board board;
@@ -57,21 +57,21 @@ public class Game {
         showCharacterMenu();
     }
 
-    private Character editCharacter(Character character) {
+    private Hero editCharacter(Hero hero) {
         String choice = menu.showCharacterEditionMenu();
 
         switch (choice) {
             case "1":
                 String newName = menu.editName();
-                character.setName(newName);
+                hero.setName(newName);
                 break;
 
             case "2":
                 String newType = menu.editType();
                 if (newType.equals("Warrior")) {
-                    character = new Warrior(character.getName(), newType);
+                    hero = new Warrior(hero.getName(), newType);
                 } else {
-                    character = new Wizard(character.getName(), newType);
+                    hero = new Wizard(hero.getName(), newType);
                 }
                 break;
             case "3":
@@ -81,7 +81,7 @@ public class Game {
                 menu.defaultMessage();
                 break;
         }
-        return character;
+        return hero;
     }
 
     public void showCharacterMenu() {
@@ -124,19 +124,26 @@ public class Game {
 
         try {
             while (playerPosition < board.getBoardSize()) {
-                menu.rollTheDice(player.getName());
-                int roll = dice();
-                playerPosition += roll;
-                menu.rollScore(roll);
-                menu.playerPosition(playerPosition);
+                String rollTheDice = menu.rollTheDice(player.getName());
+                if (rollTheDice.isEmpty()) { // when player press enter
+                    int roll = dice();
+                    playerPosition += roll;
+                    menu.rollScore(roll);
+                    menu.playerPosition(playerPosition);
+                }
+                else if (rollTheDice.equals("1")){
+                    menu.exitMessage();
+                    System.exit(0);
+                }
+                else {
+                    menu.defaultMessage();
+                }
             }
         } catch (Exception e) {
             System.out.println("Player out of bounds !!");
         }
-        if (playerPosition == board.getBoardSize()) {
+        if (playerPosition >= board.getBoardSize()) {
             menu.victoryMessage(player);
-        } else {
-            menu.defeatMessage();
         }
     }
 }

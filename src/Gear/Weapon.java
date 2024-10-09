@@ -1,12 +1,8 @@
 package Gear;
 
-public class Weapon extends OffensiveGear {
+public abstract class Weapon extends OffensiveGear {
 
-
-public Weapon() {
-
-    super("Weapon", "Wooden Sword", 1);
-
-
-}
+    public Weapon(String name, int attack) {
+        super(name, attack);
+    }
 }

@@ -2,9 +2,7 @@ package Gear;
 
 public class Shield extends DefensiveGear {
 
-    public Shield() {
-
-        super("Shield", "Kokiri Shield", 1);
-
+    public Shield(String name, int defense) {
+        super(name, defense);
     }
 }
