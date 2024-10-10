@@ -13,7 +13,7 @@ public abstract class CaseBonus implements Case {
     }
 
     @Override
-public void fight(Hero character){
+public void interact(Hero character){
 
 }
 }

@@ -4,5 +4,5 @@ import Characters.Hero;
 
 public interface Case {
 
-void fight(Hero player);
+void interact(Hero player);
 }

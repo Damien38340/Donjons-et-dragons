@@ -12,14 +12,6 @@ public class Board {
     private ArrayList<Case> board = new ArrayList<Case>();
     private CaseEmpty emptyCase;
     private int boardSize;
-    private CaseEnemy enemy;
-    private CaseBonus bonus;
-    private DefensiveGear defensiveGear;
-    private OffensiveGear offensiveGear;
-    private Weapon weapon;
-    private Spell spell;
-    private Shield shield;
-    private Potion potion;
 
     public Board() {
         this.emptyCase = new CaseEmpty();

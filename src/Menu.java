@@ -70,7 +70,7 @@ public class Menu {
         System.out.println("\r\n Press" + ANSI_BLUE + " enter" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (or press" + ANSI_RED + " 1" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
         return sc.nextLine();
     }
-        public void rollScore ( Dice roll){
+        public void rollScore (int roll){
             System.out.println("Dice: " + roll);
         }
     public void playerPosition(int playerPosition){

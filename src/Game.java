@@ -1,9 +1,6 @@
 
-import Board.Board;
-import Characters.Hero;
-import Characters.Warrior;
-import Characters.Wizard;
-import Board.Case;
+import Characters.*;
+import Board.*;
 
 
 public class Game {
@@ -15,7 +12,8 @@ public class Game {
     private Dice dice;
 
     public Game() {
-
+        this.board = new Board();
+        this.dice = new Dice();
     }
 
     public void initGame() {
@@ -116,32 +114,29 @@ public class Game {
         showCharacterMenu();
     }
 
-    public void movePlayer(Dice roll) {
+    public void movePlayer(int roll) {
         this.playerPosition += roll;
     }
 
     public void play() {
-        board = new Board();
-        dice = new Dice();
 
         try {
             while (playerPosition < board.getBoardSize()) {
                 String rollTheDice = menu.rollTheDice(player.getName());
 
                 if (rollTheDice.isEmpty()) { // when player presses enter
-                    Dice roll = dice;
+                    int roll = dice.roll();
                     movePlayer(roll);
                     menu.rollScore(roll);
                     menu.playerPosition(playerPosition);
 
                     if (playerPosition >= board.getBoardSize()) {
                         int excess = playerPosition - board.getBoardSize();
-                        playerPosition = board.getBoardSize();  // Prevent going beyond the board size
-                        throw new PlayerOutOfBounds(excess);
+                        playerPosition = board.getBoardSize();                        throw new PlayerOutOfBounds(excess);
                     }
 
                     Case currentCase = board.getBoard().get(playerPosition);
-                    currentCase.fight(player);
+                    currentCase.interact(player);
 
                 } else if (rollTheDice.equals("1")) {
                     menu.exitMessage();
@@ -154,7 +149,6 @@ public class Game {
             System.out.println(e.getMessage());
         }
 
-        // This will only run once, after the loop finishes
         if (playerPosition == board.getBoardSize()) {
             menu.victoryMessage(player);
         }

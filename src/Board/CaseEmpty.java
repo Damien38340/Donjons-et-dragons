@@ -7,7 +7,7 @@ public class CaseEmpty implements Case {
 
     }
     @Override
-    public void fight(Hero player) {
+    public void interact(Hero player) {
         System.out.println("Nothing here");
     }
 }
