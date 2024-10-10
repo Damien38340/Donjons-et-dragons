@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private Scanner sc;
+    private final Scanner sc;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_PURPLE = "\u001B[35m";
@@ -54,10 +54,8 @@ public class Menu {
         System.out.println("3. Edit information");
         System.out.println("4. Exit");
 
-        sc = new Scanner(System.in);
         return sc.nextLine();
     }
-
 
     public String showCharacterEditionMenu() {
         System.out.println("\n What would you like to change ?\n");
@@ -72,7 +70,7 @@ public class Menu {
         System.out.println("\r\n Press" + ANSI_BLUE + " enter" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (or press" + ANSI_RED + " 1" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
         return sc.nextLine();
     }
-        public void rollScore ( int roll){
+        public void rollScore ( Dice roll){
             System.out.println("Dice: " + roll);
         }
     public void playerPosition(int playerPosition){

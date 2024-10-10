@@ -1,12 +1,15 @@
 package Board;
 
+import Characters.Hero;
 import Gear.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Board {
 
-    private ArrayList<Case> board;
+
+    private ArrayList<Case> board = new ArrayList<Case>();
     private CaseEmpty emptyCase;
     private int boardSize;
     private CaseEnemy enemy;
@@ -19,23 +22,21 @@ public class Board {
     private Potion potion;
 
     public Board() {
-        this.board = new ArrayList<Case>();
         this.emptyCase = new CaseEmpty();
-        this.boardSize = 4;
+        this.boardSize = 8;
+        generateBoard(board);
     }
 
-    public void generateBoard() {
-        board = new ArrayList<Case>();
-
-        for (int i = 1; i < boardSize; i++) {
-            board.add(i, emptyCase);
+    public void generateBoard(ArrayList<Case> board) {
+        board.add(new Witch());
+        board.add(new Goblin());
+        board.add(new Dragon());
+        board.add(new KokiriShield());
+        while (board.size() < boardSize) {
+            board.add(emptyCase);
         }
-        board.add(1, new Witch());
-        board.add(2, new Goblin());
-        board.add(2, new Dragon());
-        board.add(3, new KokiriShield());
-
-
+        Collections.shuffle(board);
+        this.board = board;
     }
 
     public int getBoardSize() {
@@ -44,5 +45,12 @@ public class Board {
 
     public void setBoardSize(int boardSize) {
         this.boardSize = boardSize;
+    }
+    public ArrayList<Case> getBoard() {
+        return board;
+    }
+
+    public void setBoard(ArrayList<Case> board) {
+        this.board = board;
     }
 }

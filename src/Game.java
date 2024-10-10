@@ -3,14 +3,16 @@ import Board.Board;
 import Characters.Hero;
 import Characters.Warrior;
 import Characters.Wizard;
+import Board.Case;
 
 
 public class Game {
 
     private Hero player;
-    private int playerPosition;
+    private int playerPosition = 1;
     private Menu menu;
     private Board board;
+    private Dice dice;
 
     public Game() {
 
@@ -57,21 +59,21 @@ public class Game {
         showCharacterMenu();
     }
 
-    private Hero editCharacter(Hero hero) {
+    private Hero editCharacter(Hero player) {
         String choice = menu.showCharacterEditionMenu();
 
         switch (choice) {
             case "1":
                 String newName = menu.editName();
-                hero.setName(newName);
+                player.setName(newName);
                 break;
 
             case "2":
                 String newType = menu.editType();
                 if (newType.equals("Warrior")) {
-                    hero = new Warrior(hero.getName(), newType);
+                    player = new Warrior(player.getName(), newType);
                 } else {
-                    hero = new Wizard(hero.getName(), newType);
+                    player = new Wizard(player.getName(), newType);
                 }
                 break;
             case "3":
@@ -81,7 +83,7 @@ public class Game {
                 menu.defaultMessage();
                 break;
         }
-        return hero;
+        return player;
     }
 
     public void showCharacterMenu() {
@@ -114,36 +116,48 @@ public class Game {
         showCharacterMenu();
     }
 
-    public int dice() {
-        return (int) (Math.random() * 1 + 1);
+    public void movePlayer(Dice roll) {
+        this.playerPosition += roll;
     }
 
     public void play() {
-        playerPosition = 1;
         board = new Board();
+        dice = new Dice();
 
         try {
             while (playerPosition < board.getBoardSize()) {
                 String rollTheDice = menu.rollTheDice(player.getName());
-                if (rollTheDice.isEmpty()) { // when player press enter
-                    int roll = dice();
-                    playerPosition += roll;
+
+                if (rollTheDice.isEmpty()) { // when player presses enter
+                    Dice roll = dice;
+                    movePlayer(roll);
                     menu.rollScore(roll);
                     menu.playerPosition(playerPosition);
-                }
-                else if (rollTheDice.equals("1")){
+
+                    if (playerPosition >= board.getBoardSize()) {
+                        int excess = playerPosition - board.getBoardSize();
+                        playerPosition = board.getBoardSize();  // Prevent going beyond the board size
+                        throw new PlayerOutOfBounds(excess);
+                    }
+
+                    Case currentCase = board.getBoard().get(playerPosition);
+                    currentCase.fight(player);
+
+                } else if (rollTheDice.equals("1")) {
                     menu.exitMessage();
-                    System.exit(0);
-                }
-                else {
-                    menu.defaultMessage();
+                    System.exit(0);  // Exit the game
+                } else {
+                    menu.defaultMessage();  // Handle other input
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Player out of bounds !!");
+        } catch (PlayerOutOfBounds e) {
+            System.out.println(e.getMessage());
         }
-        if (playerPosition >= board.getBoardSize()) {
+
+        // This will only run once, after the loop finishes
+        if (playerPosition == board.getBoardSize()) {
             menu.victoryMessage(player);
         }
     }
+
 }

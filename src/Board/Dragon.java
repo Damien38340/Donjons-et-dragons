@@ -10,6 +10,7 @@ public class Dragon extends CaseEnemy {
     @Override
     public void fight(Hero player){
         System.out.println("I'm a Dragon and you will burn!!");
-        System.out.println(" - " + attack);
+        System.out.println("damage - " + attack);
+        System.out.println("HP: " + player.getHp());
     }
 }

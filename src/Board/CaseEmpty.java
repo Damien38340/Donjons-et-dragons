@@ -8,6 +8,6 @@ public class CaseEmpty implements Case {
     }
     @Override
     public void fight(Hero player) {
-
+        System.out.println("Nothing here");
     }
 }

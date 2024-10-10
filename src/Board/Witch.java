@@ -10,8 +10,8 @@ public class Witch extends CaseEnemy {
     @Override
     public void fight(Hero player) {
         System.out.println("I'm a Witch and I curse you !!");
-        System.out.println(" - " + attack);
-        player.setHp( player.getHp() - this.attack);
-
+        System.out.println("Damage - " + attack);
+        player.setHp(player.getHp() - this.attack);
+        System.out.println("HP: " + player.getHp());
     }
 }
