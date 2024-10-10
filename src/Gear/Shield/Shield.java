@@ -1,4 +1,6 @@
-package Gear;
+package Gear.Shield;
+
+import Gear.DefensiveGear;
 
 public class Shield extends DefensiveGear {
 

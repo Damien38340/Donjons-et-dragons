@@ -1,4 +1,6 @@
-package Gear;
+package Gear.Spell;
+
+import Gear.OffensiveGear;
 
 public class Spell extends OffensiveGear {
 

@@ -1,15 +1,15 @@
 package Gear;
 
+import Board.CaseBonus;
 import org.w3c.dom.ls.LSOutput;
 
-public abstract class OffensiveGear {
+public abstract class OffensiveGear extends CaseBonus {
 
     protected String name;
     protected int attack;
 
     public OffensiveGear(String name, int attack) {
-        this.name = name;
-        this.attack = attack;
+       super(name, attack);
     }
 
     public String toString() {

@@ -66,8 +66,8 @@ public class Menu {
         return sc.nextLine();
     }
 
-    public String rollTheDice(String name) {
-        System.out.println("\r\n Press" + ANSI_BLUE + " enter" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (or press" + ANSI_RED + " 1" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
+    public String rollTheDiceQuestion(String name) {
+        System.out.println("\r\n Press" + ANSI_BLUE + " enter" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (press" + ANSI_PURPLE + " 1" + ANSI_RESET +  " to see your info or press" + ANSI_RED + " 2" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
         return sc.nextLine();
     }
         public void rollScore (int roll){

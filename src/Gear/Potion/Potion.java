@@ -1,4 +1,6 @@
-package Gear;
+package Gear.Potion;
+
+import Gear.DefensiveGear;
 
 public class Potion extends DefensiveGear {
 

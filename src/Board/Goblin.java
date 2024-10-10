@@ -9,10 +9,13 @@ public class Goblin extends CaseEnemy {
 
     @Override
     public void interact(Hero player){
-        System.out.println("I'm a Goblin !!");
-        System.out.println("Damage - " + attack);
-        System.out.println("HP: " + player.getHp());
 
+        System.out.println("I'm a Goblin !!\n Damage - " + attack);
+        player.setHp(player.getHp() - this.attack);
+        System.out.println("HP: " + player.getHp());
+        System.out.println("You hit the Goblin !\n + " + player.getHp());
+        hp -= player.getAttack();
+        System.out.println("Goblin HP: " + hp);
     }
 
 }

@@ -1,4 +1,6 @@
-package Gear;
+package Gear.Weapon;
+
+import Gear.OffensiveGear;
 
 public abstract class Weapon extends OffensiveGear {
 
