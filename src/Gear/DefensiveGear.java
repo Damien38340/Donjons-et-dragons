@@ -3,20 +3,30 @@ import Board.*;
 
 public abstract class DefensiveGear extends CaseBonus {
 
-    protected String name;
-    protected int defense;
 
-    public DefensiveGear(String name, int defense) {
-        super(name, defense);
+    protected String name;
+    protected int level;
+
+    public DefensiveGear(String name, int level) {
+        super(name, level);
 
         this.name = name;
-        this.defense = defense;
+        this.level = level;
     }
 
+    @Override
     public String toString() {
-        if (name.isEmpty() && defense ==0) {
-            return "Unequipped";
-        }
-            return name + " (\uD83E\uDD94 defense + " + defense + ")";
+            return name + " (\uD83E\uDD94 defense + " + level + ")";
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+
 }

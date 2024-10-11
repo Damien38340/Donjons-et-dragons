@@ -10,8 +10,8 @@ public class Water extends Potion {
     @Override
     public void interact(Hero player) {
 
+        player.setDefensiveGear(this);
         System.out.println("You found Water !");
-        System.out.println("defense + " + defense);
-        player.setDefensiveGear(new Water());
+        System.out.println("Restore " + this.level + " HP");
     }
 }

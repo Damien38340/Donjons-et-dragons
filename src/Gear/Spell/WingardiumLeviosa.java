@@ -1,7 +1,6 @@
 package Gear.Spell;
 
 import Characters.Hero;
-import Gear.Potion.Ale;
 
 public class WingardiumLeviosa extends Spell {
 
@@ -12,10 +11,10 @@ public class WingardiumLeviosa extends Spell {
     @Override
     public void interact(Hero player) {
 
+        player.setOffensiveGear(this);
+        player.setAttack(player.getAttack()+ this.level);
         System.out.println("You learnt Wingardium Leviosa !");
-        System.out.println("attack + " + attack);
-        player.setOffensiveGear(new WingardiumLeviosa());
-        player.setAttack(player.getAttack()+attack);
+        System.out.println("attack + " + this.level);
     }
 
 }

@@ -8,9 +8,11 @@ public class WoodenSword extends Weapon {
     }
 
     @Override public void interact(Hero player){
+
+        player.setOffensiveGear(this);
+        player.setAttack(player.getAttack()+ this.level);
         System.out.println("You found a Wooden Sword !");
-        System.out.println("attack + " + attack);
-        player.setAttack(player.getAttack()+attack);
+        System.out.println("attack + " + this.level);
 
     }
 

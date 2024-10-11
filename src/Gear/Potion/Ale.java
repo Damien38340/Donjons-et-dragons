@@ -4,14 +4,14 @@ import Characters.Hero;
 
 public class Ale extends Potion {
     public Ale() {
-        super("Ale", 3);
+        super("Ale", 10);
     }
 
     @Override
     public void interact(Hero player) {
 
+        player.setDefensiveGear(this);
         System.out.println("You found an Ale !");
-        System.out.println("defense + " + defense);
-        player.setDefensiveGear(new Ale());
+        System.out.println("Restore " + this.level + " HP");
     }
 }

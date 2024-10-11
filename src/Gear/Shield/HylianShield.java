@@ -1,9 +1,9 @@
 package Gear.Shield;
 
 import Characters.Hero;
-import Gear.Potion.Ale;
 
 public class HylianShield extends Shield {
+
 
     public HylianShield() {
         super( "Hylian Shield", 3);
@@ -12,9 +12,11 @@ public class HylianShield extends Shield {
     @Override
     public void interact(Hero player) {
 
+        player.setDefensiveGear(this);
         System.out.println("You found an Hylian Shield !");
-        System.out.println("defense + " + defense);
-        player.setDefensiveGear(new HylianShield());
+        System.out.println("defense + " + this.level);
     }
+
+
 }
 

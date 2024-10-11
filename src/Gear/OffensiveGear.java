@@ -1,21 +1,32 @@
 package Gear;
 
-import Board.CaseBonus;
-import org.w3c.dom.ls.LSOutput;
+import Board.*;
 
 public abstract class OffensiveGear extends CaseBonus {
 
-    protected String name;
-    protected int attack;
 
-    public OffensiveGear(String name, int attack) {
-       super(name, attack);
+    protected String name;
+    protected int level;
+
+    public OffensiveGear(String name, int level) {
+       super(name, level);
+
+      this.name = name;
+      this.level = level;
     }
 
+    @Override
     public String toString() {
-        if (name.isEmpty() && attack==0) {
-            return "Unequipped";
-        }
-        return name + " (\uD83D\uDC3B attack + " + attack + ")";
+        return name + " (\uD83D\uDC3B attack + " + level + ")";
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
     }
 }

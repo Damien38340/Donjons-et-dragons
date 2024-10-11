@@ -124,7 +124,7 @@ public class Game {
             while (playerPosition < board.getBoardSize()) {
                 String rollTheDiceQuestion = menu.rollTheDiceQuestion(player.getName());
 
-                if (rollTheDiceQuestion.isEmpty()) { // when player presses enter
+                if (rollTheDiceQuestion.equals("d")) { // when player presses enter
                     int roll = dice.roll();
                     movePlayer(roll);
                     menu.rollScore(roll);
@@ -137,13 +137,17 @@ public class Game {
 
                     Case currentCase = board.getBoard().get(playerPosition);
                     currentCase.interact(player);
-
+                    board.moveEnemyToRandomCase(currentCase);
+                    if (player.getHp() <= 0){
+                        menu.defeatMessage();
+                        break;
+                    }
                 }
-                else if (rollTheDiceQuestion.equals("1")) {
+                else if (rollTheDiceQuestion.equals("e")) {
                     menu.showPlayerInfo(player); // Show the player info
                 }
 
-                else if (rollTheDiceQuestion.equals("2")) {
+                else if (rollTheDiceQuestion.equals("q")) {
                     menu.exitMessage();
                     System.exit(0);  // Exit the game
                 }
@@ -157,6 +161,7 @@ public class Game {
         }
 
         if (playerPosition == board.getBoardSize()) {
+
             playerPosition = 1;
             menu.victoryMessage(player);
         }
