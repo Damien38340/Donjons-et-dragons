@@ -9,6 +9,8 @@ public class Warrior extends Hero {
         super(name, type);
         this.setHp(randomLevel());
         this.setAttack(randomLevel());
+        if (getDefensiveGear() != null){
+        this.setDefense(getDefensiveGear().getLevel());}
     }
 
     public int randomLevel(){

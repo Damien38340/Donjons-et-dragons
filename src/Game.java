@@ -137,11 +137,11 @@ public class Game {
 
                     Case currentCase = board.getBoard().get(playerPosition);
                     currentCase.interact(player);
-                    board.moveEnemyToRandomCase(currentCase);
                     if (player.getHp() <= 0){
                         menu.defeatMessage();
                         break;
                     }
+                    board.moveEnemyToRandomCase(currentCase);
                 }
                 else if (rollTheDiceQuestion.equals("e")) {
                     menu.showPlayerInfo(player); // Show the player info

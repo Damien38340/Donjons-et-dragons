@@ -10,6 +10,7 @@ public abstract class Hero {
     protected String type;
     private int hp;
     private int attack;
+    private int defense;
     private OffensiveGear offensiveGear;
     private DefensiveGear defensiveGear;
 
@@ -25,6 +26,13 @@ public abstract class Hero {
         this.name = name;
         this.type = type;
     }
+
+    public Hero(String name, String type, int defense) {
+        this.name = name;
+        this.type = type;
+        this.defense = defense;
+    }
+
 
     public int getHp() {
         return hp;
@@ -66,13 +74,21 @@ public abstract class Hero {
         this.name = newName;
     }
 
-    public void getType() {
-        this.type = type;
+    public String getType() {
+        return this.type = type;
     }
 
     public void setType(String newType) {
         this.type = newType;
 
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 
     public String toString() {

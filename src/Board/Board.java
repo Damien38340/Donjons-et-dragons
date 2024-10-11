@@ -1,10 +1,15 @@
 package Board;
 
-import Gear.Potion.Ale;
-import Gear.Potion.Water;
+import Board.Enemy.CaseEnemy;
+import Board.Enemy.Dragon;
+import Board.Enemy.Goblin;
+import Board.Enemy.Witch;
+import Gear.ArcaneDefenses.BarrierSpell;
+import Gear.ArcaneDefenses.ElixirOfResilience;
+import Potion.Ale;
+import Potion.Water;
 import Gear.Shield.HylianShield;
 import Gear.Shield.KokiriShield;
-import Gear.Shield.Shield;
 import Gear.Spell.AbraCadavra;
 import Gear.Spell.WingardiumLeviosa;
 import Gear.Weapon.BiggoronSword;
@@ -32,16 +37,19 @@ public class Board {
         addMultipleCases(board, new Dragon(), 4);
 
         addMultipleCases(board, new WoodenSword(), 3);
-        addMultipleCases(board, new BiggoronSword(), 1);
+        addMultipleCases(board, new BiggoronSword(), 2);
 
-        addMultipleCases(board, new KokiriShield(), 3);
+        addMultipleCases(board, new KokiriShield(), 4);
         addMultipleCases(board, new HylianShield(), 1);
 
-        addMultipleCases(board, new AbraCadavra(),2);
-        addMultipleCases(board, new WingardiumLeviosa(), 2);
+        addMultipleCases(board, new WingardiumLeviosa(), 3);
+        addMultipleCases(board, new AbraCadavra(),1);
 
+        addMultipleCases(board, new ElixirOfResilience(), 4);
+        addMultipleCases(board, new BarrierSpell(),1);
+
+        addMultipleCases(board, new Water(), 6);
         addMultipleCases(board, new Ale(), 2);
-        addMultipleCases(board, new Water(), 2);
 
         while (board.size() < boardSize) {
             board.add(new CaseEmpty());

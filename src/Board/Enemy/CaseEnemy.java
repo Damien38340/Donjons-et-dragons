@@ -1,4 +1,6 @@
-package Board;
+package Board.Enemy;
+
+import Board.Case;
 
 public abstract class CaseEnemy implements Case {
 

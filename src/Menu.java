@@ -1,4 +1,6 @@
+import Board.Enemy.CaseEnemy;
 import Characters.Hero;
+import Gear .*;
 
 import java.util.Scanner;
 
