@@ -32,6 +32,8 @@ public class Board {
 
     public void generateBoard(ArrayList<Case> board) {
 
+        //the enemies are not unique, they only have one reference instead of multiple ones
+
         addMultipleCases(board, new Witch(), 10);
         addMultipleCases(board, new Goblin(), 10);
         addMultipleCases(board, new Dragon(), 4);

@@ -73,6 +73,9 @@ public class Goblin extends CaseEnemy {
                 "            .=%%%%%%#%###%##%%+...                              ..:-*#####%%%%%-==..                \n" +
                 "           ..:-:+*+#%##%%%%=:...                                 ..   ...........                   \n" +
                 "               ....-..=:....                                                       ");
+
+        //Still have the same error that equipment is null
+        //The shield is not working as expected either
         int defenseValue = isEquipmentNull(player) ? 0 : player.getDefensiveGear().getLevel();
         System.out.println("\r\nI'm a Goblin !!\n Damage - " + attack);
         player.setHp(player.getHp() - this.attack + defenseValue);
