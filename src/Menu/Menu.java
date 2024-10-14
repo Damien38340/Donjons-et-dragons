@@ -1,6 +1,6 @@
-import Board.Enemy.CaseEnemy;
+package Menu;
+
 import Characters.Hero;
-import Gear .*;
 
 import java.util.Scanner;
 
@@ -69,13 +69,15 @@ public class Menu {
     }
 
     public String rollTheDiceQuestion(String name) {
-        System.out.println("\r\n Press" + ANSI_BLUE + " d" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (press" + ANSI_PURPLE + " e" + ANSI_RESET +  " to see your info or press" + ANSI_RED + " q" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
+        System.out.println("\r\n Press" + ANSI_BLUE + " d" + ANSI_RESET + " to roll the dice dear " + ANSI_CYAN + name + ANSI_RESET + " (press" + ANSI_PURPLE + " e" + ANSI_RESET + " to see your info or press" + ANSI_RED + " q" + ANSI_RESET + " if you wanna quit 'cause you're a coward, coward)");
         return sc.nextLine();
     }
-        public void rollScore (int roll){
-            System.out.println("Dice: " + roll);
-        }
-    public void playerPosition(int playerPosition){
+
+    public void rollScore(int roll) {
+        System.out.println("Dice: " + roll);
+    }
+
+    public void playerPosition(int playerPosition) {
         System.out.println("Case: " + playerPosition);
     }
 
@@ -110,4 +112,10 @@ public class Menu {
         System.out.println("\n \uD83D\uDC80 I knew you would not make it! \uD83D\uDC80");
     }
 
+    public String replayMessage() {
+        System.out.println("\r\nWould you like to give it another try ? ");
+        System.out.println("\r\nPress " + ANSI_CYAN + "Yes " + ANSI_RESET + "to continue");
+        System.out.println("Press " + ANSI_RED + "No " + ANSI_RESET + "to hit the road");
+        return sc.nextLine();
+    }
 }

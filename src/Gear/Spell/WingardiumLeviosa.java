@@ -23,7 +23,7 @@ public class WingardiumLeviosa extends Spell {
             }
         }
         else {
-            System.out.println("You're a " + player.getType() + " .You cannot use " + this.getName());
+            System.out.println("You're a " + player.getType() + ". You cannot use " + this.getName());
         }
     }
     public boolean isEquipmentNull(Hero player) {

@@ -4,78 +4,54 @@ import Characters.Hero;
 
 public class Witch extends CaseEnemy {
 
-    String name = "Witch";
 
     public Witch() {
-        super(2, 9);
+        super("Witch", 2, 9);
     }
 
     @Override
     public void interact(Hero player) {
-
-        System.out.println("                                               .:+#-.                                               \n" +
-                "                                             ..*@@@@%-.                                             \n" +
-                "                                            ..@**@@@@@%-.                                           \n" +
-                "                                            .*=..:@@@@@@@-.                                         \n" +
-                "                                            -+   .=@@@@@@@@+....::.                                 \n" +
-                "                                           ...   .:@@@@@@@@@@@@*...                                 \n" +
-                "                                                 ..#@@@@@@@@@@..                                    \n" +
-                "                                                  .*@@@@@@@@@@@%..                                  \n" +
-                "                                               .:#@@@@@@@@@@@@*-+.                                  \n" +
-                "                                          ..::=@@@@@@@@@@@@@@@=.                                    \n" +
-                "                                ....::.:-*@@@@@@@@@@@@@@@@@@@%#-                                    \n" +
-                "                                  .==*##%@@@@@@@@@@@@@@@@@@%..                                      \n" +
-                "                              ...:+-**-+#+@@@@@@@@@@@@@@@@@@@@:.                                    \n" +
-                "                              ....-...#@@@@@@@@@@@@@@@@@@@@@@@@@#:.                                 \n" +
-                "                               .:*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%:                                \n" +
-                "                       ......-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#@@@@#-..                     ...-+:.\n" +
-                "                      .+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#. .*@@@@@*-:....          ..-+@@@%+..\n" +
-                "                 ..:-+#.-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=.     .:#%@@@@@@@@@@@@-=+-%@@@%-..    \n" +
-                "               ..*-...+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*....-=+**+:.....%@@@@@@@@@@@@+...       \n" +
-                "               .-%@@@@@@@@+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#:.+@@@@@@@@@@*:..         \n" +
-                "              .*@@@#++==-%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%:.                \n" +
-                "             .+@@*..#@@@@@@@@@@@@@@@#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+ #@@@:.                 \n" +
-                "         .:=%@@@+.:%@@@##+#@@@@@%-*@%*:.#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=. =@@@                   \n" +
-                "        .@@@@%=.+@@@@*..%@@@@@%:+@+.   .%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.  -@@:                   \n" +
-                "        %=..  .%@%:.. .#@@@...+@@-     .*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#.  :@@.                    \n" +
-                "      .*.  ...+@@....*@@#..-%@@*..     ..#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%.. +@+.                    \n" +
-                "      ..   .*%=.. .#+:.   .@@-.           .-*@@@@@@@@@@@@@@@@@@@@@@@@@@@@+..#..                     \n" +
-                "          .+.    -@:.     .*.         ..-+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-*.                       \n" +
-                "           .     #-.      :..:..  .:-#@@@@%*-#@@@@@@@@@@@@@@@@%@@@@*.:%@@@#.                        \n" +
-                "               .:..    ..=:*@+-:*@@@@@%-...=@@@@@@@@@@@@@@@+.=@@@@:.  .-@@@@*:..                    \n" +
-                "                      ..##@@@@@@@@#......=@@#-@@@@@@@@@@@*..-@@@#..     =@@@@@@+....                \n" +
-                "     :.   .:...=+**=::+@@@@@@@@*=...  .+*:+%@@@@@@@@@@@%:..@@@@@+.      -@@@@@@@@@@#.               \n" +
-                " ...-*#%@@@@@@@@@@@@@@@@@@@@@@@*:. ..-*:+@##@@@@@@@@*-...:%@@@@@+.      .#@%..--:...                \n" +
-                ".-+#@@@@@@@@@@@@@@@@@@#+......::.  ..-#@**@@@@@@#:...   ..=#.%@@%..      ....                       \n" +
-                "..:=#@@@@@@@@@@@@@@@@=.            .-:.+@%-*@@@%.           .-%@@@%:                                \n" +
-                "..:*@@@@@@@@@@@@@@@#...            .:=%@*%@@%#:..            ....-+:                                \n" +
-                " .#=*#%@@@@@@@@@@%-.              :%-.:@@@*..                                                       \n" +
-                " .:**#%@@@@@@@@#=..             ......%@*..                                                         \n" +
-                "  ..:-#%%@@@@%:..                  .#%=...                                                          \n" +
-                "    .-:-+@@#+..                 ..:@+.                                                              \n" +
-                "    ....=+-=.                   .+@+.                                                               \n" +
-                "          ..                    :*..                                                                \n" +
-                "                                ..                                                                  ");
-        int defenseValue = isEquipmentNull(player) ? 0 : player.getDefensiveGear().getLevel();
-        System.out.println("\r\nI'm a Witch and I curse you !!\n Damage - " + attack);
+        visualizer.displayWitch();
+        int defenseValue = getDefenseValue(player);
         player.setHp(player.getHp() - this.attack + defenseValue);
+        String attackMessage = getAttackMessage();
+        System.out.println(attackMessage);
         System.out.println(player.getName() + " HP: " + player.getHp());
         if (player.getHp() <= 0) {
             System.out.println("You died.");
         } else {
-            int attackValue = isEquipmentNull(player) ? player.getAttack() : player.getAttack() + player.getOffensiveGear().getLevel();
-            System.out.println("You hit the Witch!\n  + " + attackValue);
+            int attackValue = getAttackValue(player);
+            System.out.println("You hit the " + name + "!\n  + " + attackValue);
             level -= attackValue;
-            System.out.println("Witch HP: " + level);
+            System.out.println(name + " HP: " + level);
         }
+
     }
 
-    public boolean isEquipmentNull(Hero player){
+    private int getAttackValue(Hero player) {
+        return isOffensiveEquipmentNull(player) ? player.getAttack() : player.getAttack() + player.getOffensiveGear().getLevel();
+    }
+
+    private int getDefenseValue(Hero player) {
+        return isDefensiveEquipmentNull(player) ? 0 : player.getDefensiveGear().getLevel();
+    }
+
+    public boolean isOffensiveEquipmentNull(Hero player) {
         return player.getOffensiveGear() == null;
+    }
+
+    public boolean isDefensiveEquipmentNull(Hero player) {
+        return player.getDefensiveGear() == null;
+
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getComplement() {
+        return " and I curse you!!";
     }
 }

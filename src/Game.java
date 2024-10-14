@@ -1,6 +1,7 @@
 
 import Characters.*;
 import Board.*;
+import Menu.Menu;
 
 
 public class Game {
@@ -48,7 +49,7 @@ public class Game {
 
         String type = menu.askingType();
 
-        if (type.equals("Warrior")) {
+        if (type.equalsIgnoreCase("Warrior")) {
             player = new Warrior(userName, type);
         } else {
             player = new Wizard(userName, type);
@@ -68,7 +69,7 @@ public class Game {
 
             case "2":
                 String newType = menu.editType();
-                if (newType.equals("Warrior")) {
+                if (newType.equalsIgnoreCase("Warrior")) {
                     player = new Warrior(player.getName(), newType);
                 } else {
                     player = new Wizard(player.getName(), newType);
@@ -91,6 +92,7 @@ public class Game {
             case "1":
                 //start a new game
                 play();
+                askReplay();
                 break;
             case "2":
                 //show information
@@ -114,6 +116,18 @@ public class Game {
         showCharacterMenu();
     }
 
+    public void askReplay(){
+        String replay = menu.replayMessage();
+        if (replay.equalsIgnoreCase("Yes")) {
+            mainMenu();
+        } else if (replay.equalsIgnoreCase("No")) {
+            exitGame();
+        } else {
+            menu.defaultMessage();
+            askReplay();
+        }
+    }
+
     public void movePlayer(int roll) {
         this.playerPosition += roll;
     }
@@ -124,36 +138,19 @@ public class Game {
             while (playerPosition < board.getBoardSize()) {
                 String rollTheDiceQuestion = menu.rollTheDiceQuestion(player.getName());
 
-                if (rollTheDiceQuestion.equals("d")) { // when player presses enter
-                    int roll = dice.roll();
-                    movePlayer(roll);
-                    menu.rollScore(roll);
-                    menu.playerPosition(playerPosition);
-
-                    if (playerPosition >= board.getBoardSize()) {
-                        int excess = playerPosition - board.getBoardSize();
-                        playerPosition = board.getBoardSize();                        throw new PlayerOutOfBounds(excess);
+                switch (rollTheDiceQuestion) {
+                    case "d" -> {
+                        treatDice();
                     }
-
-                    Case currentCase = board.getBoard().get(playerPosition);
-                    currentCase.interact(player);
-                    if (player.getHp() <= 0){
-                        menu.defeatMessage();
-                        break;
+                    case "e" -> menu.showPlayerInfo(player); // Show the player info
+                    case "q" -> {
+                        menu.exitMessage();
+                        System.exit(0);  // Exit the game
                     }
-                    board.moveEnemyToRandomCase(currentCase);
+                    default -> menu.defaultMessage();  // Handle other input
                 }
-                else if (rollTheDiceQuestion.equals("e")) {
-                    menu.showPlayerInfo(player); // Show the player info
-                }
-
-                else if (rollTheDiceQuestion.equals("q")) {
-                    menu.exitMessage();
-                    System.exit(0);  // Exit the game
-                }
-
-                else {
-                    menu.defaultMessage();  // Handle other input
+                if(player.getHp()<=0){
+                    return;
                 }
             }
         } catch (PlayerOutOfBounds e) {
@@ -165,6 +162,27 @@ public class Game {
             playerPosition = 1;
             menu.victoryMessage(player);
         }
+    }
+
+    private void treatDice() throws PlayerOutOfBounds {
+        int roll = dice.roll();
+        movePlayer(roll);
+        menu.rollScore(roll);
+        menu.playerPosition(playerPosition);
+
+        if (playerPosition >= board.getBoardSize()) {
+            int excess = playerPosition - board.getBoardSize();
+            playerPosition = board.getBoardSize();
+            throw new PlayerOutOfBounds(excess);
+        }
+
+        Case currentCase = board.getBoard().get(playerPosition);
+        currentCase.interact(player);
+        if (player.getHp() <= 0) {
+            menu.defeatMessage();
+            return;
+        }
+        board.moveEnemyToRandomCase(currentCase);  // when player presses enter
     }
 
 }

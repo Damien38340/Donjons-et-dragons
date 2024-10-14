@@ -32,26 +32,45 @@ public class Board {
 
     public void generateBoard(ArrayList<Case> board) {
 
-        //the enemies are not unique, they only have one reference instead of multiple ones
-
-        addMultipleCases(board, new Witch(), 10);
-        addMultipleCases(board, new Goblin(), 10);
-        addMultipleCases(board, new Dragon(), 4);
-
-        addMultipleCases(board, new WoodenSword(), 3);
-        addMultipleCases(board, new BiggoronSword(), 2);
-
-        addMultipleCases(board, new KokiriShield(), 4);
-        addMultipleCases(board, new HylianShield(), 1);
-
-        addMultipleCases(board, new WingardiumLeviosa(), 3);
-        addMultipleCases(board, new AbraCadavra(),1);
-
-        addMultipleCases(board, new ElixirOfResilience(), 4);
-        addMultipleCases(board, new BarrierSpell(),1);
-
-        addMultipleCases(board, new Water(), 6);
-        addMultipleCases(board, new Ale(), 2);
+        for (int i = 0; i < 10; i++) {
+            board.add(new Witch());
+        }
+        for (int i = 0; i < 10; i++) {
+            board.add(new Goblin());
+        }
+        for (int i = 0; i < 4; i++) {
+            board.add(new Dragon());
+        }
+        for (int i = 0; i < 3; i++) {
+            board.add(new WoodenSword());
+        }
+        for (int i = 0; i < 2; i++) {
+            board.add(new BiggoronSword());
+        }
+        for (int i = 0; i < 4; i++) {
+            board.add(new KokiriShield());
+        }
+        for (int i = 0; i < 1; i++) {
+            board.add(new HylianShield());
+        }
+        for (int i = 0; i < 3; i++) {
+            board.add(new WingardiumLeviosa());
+        }
+        for (int i = 0; i < 1; i++) {
+            board.add(new AbraCadavra());
+        }
+        for (int i = 0; i < 4; i++) {
+            board.add(new ElixirOfResilience());
+        }
+        for (int i = 0; i < 1; i++) {
+            board.add(new BarrierSpell());
+        }
+        for (int i = 0; i < 6; i++) {
+            board.add(new Water());
+        }
+        for (int i = 0; i < 2; i++) {
+            board.add(new Ale());
+        }
 
         while (board.size() < boardSize) {
             board.add(new CaseEmpty());
@@ -74,13 +93,6 @@ public class Board {
             }
         }
     }
-
-    public void addMultipleCases(ArrayList<Case> board, Case caseType, int count) {
-        for (int i = 0; i < count; i++) {
-            board.add(caseType);
-        }
-    }
-
 
     public int getBoardSize() {
         return boardSize;
