@@ -1,7 +1,13 @@
 package Board.Enemy;
 
+/**
+ * Represents the visualization of different enemies in the game.
+ * Each enemy subclass will have its own method to get an image.
+ */
 public class EnemyVisualizer {
-
+    /**
+     * Displays an ASCII art representation of a Dragon.
+     */
     public void displayDragon() {
 
         System.out.println("          ___====-_  _-====___\n" +
@@ -22,7 +28,9 @@ public class EnemyVisualizer {
                 "                  (vvv(VVV)(VVV)vvv)");
 
     }
-
+    /**
+     * Displays an ASCII art representation of a Goblin.
+     */
     public void displayGoblin(){
         System.out.println("                                           .:.                                  .:.             \n" +
                 "        ..                                 :.  .=-. ...                        ..:=+=:.             \n" +
@@ -85,7 +93,9 @@ public class EnemyVisualizer {
                 "           ..:-:+*+#%##%%%%=:...                                 ..   ...........                   \n" +
                 "               ....-..=:....                                                       ");
     }
-
+    /**
+     * Displays an ASCII art representation of a Witch.
+     */
     public void displayWitch(){
 
         System.out.println("                                               .:+#-.                                               \n" +
@@ -132,6 +142,5 @@ public class EnemyVisualizer {
                 "          ..                    :*..                                                                \n" +
                 "                                ..                                                                  ");
     }
-
 
     }
