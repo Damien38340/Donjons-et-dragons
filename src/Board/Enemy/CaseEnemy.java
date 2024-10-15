@@ -5,7 +5,7 @@ import Characters.Hero;
 
 /**
  * Represents an enemy case on the board. This abstract class provides common attributes
- * and methods for enemies, including their name, attack strength, and level.
+ * and methods for enemies, including their name, attack strength, and HP.
  * Subclasses should implement the specific behavior for each type of enemy.
  */
 public abstract class CaseEnemy implements Case {
@@ -27,13 +27,90 @@ public abstract class CaseEnemy implements Case {
      *
      * @param name The name of the enemy.
      * @param attack The attack strength of the enemy.
-     * @param level The level of the enemy.
+     * @param level The HP of the enemy.
      */
     public CaseEnemy(String name, int attack, int level) {
         this.name = name;
         this.attack = attack;
         this.level = level;
         this.visualizer = new EnemyVisualizer();
+    }
+    /**
+     * Defines the interaction between the enemy and the hero.
+     * This method calculates damage dealt to the hero and the counter-attack from the hero.
+     *
+     * @param player The hero interacting with the enemy.
+     */
+    public void interact(Hero player) {
+
+        // Calculate defense and adjust player's HP
+        int defenseValue = getDefenseValue(player);
+        player.setHp(player.getHp() - (this.attack - defenseValue)); // Adjust based on player's defense
+
+        // Display attack message
+        String attackMessage = getAttackMessage();
+        System.out.println(attackMessage);
+        System.out.println(player.getName() + " HP: " + player.getHp());
+
+        // Check if player is dead
+        if (player.getHp() <= 0) {
+            System.out.println("You died.");
+        } else {
+            int attackValue = getAttackValue(player);
+            System.out.println("You hit the " + name + "!\n  + " + attackValue);
+            level -= attackValue;
+            System.out.println(name + " HP: " + level);
+        }
+    }
+
+    /**
+     * Calculates the hero's attack value when hitting the enemy, considering offensive gear if equipped.
+     *
+     * @param player The hero who is attacking the enemy.
+     * @return The attack value of the hero, including any bonuses from offensive gear.
+     */
+    protected int getAttackValue(Hero player) {
+        return isOffensiveEquipmentNull(player) ? player.getAttack() : player.getAttack() + player.getOffensiveGear().getLevel();
+    }
+
+    /**
+     * Calculates the hero's defense value when the enemy attacks, considering defensive gear if equipped.
+     *
+     * @param player The hero being attacked by the enemy.
+     * @return The defense value provided by the hero's defensive gear, or 0 if none is equipped.
+     */
+    protected int getDefenseValue(Hero player) {
+        return isDefensiveEquipmentNull(player) ? 0 : player.getDefensiveGear().getLevel();
+    }
+
+    /**
+     * Checks if the hero has offensive gear equipped.
+     *
+     * @param player The hero whose offensive gear is being checked.
+     * @return {@code true} if the hero does not have offensive gear equipped, otherwise {@code false}.
+     */
+    public boolean isOffensiveEquipmentNull(Hero player) {
+        return player.getOffensiveGear() == null;
+    }
+
+    /**
+     * Checks if the hero has defensive gear equipped.
+     *
+     * @param player The hero whose defensive gear is being checked.
+     * @return {@code true} if the hero does not have defensive gear equipped, otherwise {@code false}.
+     */
+    public boolean isDefensiveEquipmentNull(Hero player) {
+        return player.getDefensiveGear() == null;
+    }
+
+    /**
+     * Returns the name of the enemy.
+     *
+     * @return the name of the enemy.
+     */
+    @Override
+    public String getName() {
+        return name;
     }
 
     /**
@@ -60,7 +137,5 @@ public abstract class CaseEnemy implements Case {
      *
      * @return a complementary description of the enemy.
      */
-    protected abstract String getComplement();
-    protected abstract int getDefenseValue(Hero player);
-    protected abstract int getAttackValue(Hero player);
+    public abstract String getComplement();
 }
