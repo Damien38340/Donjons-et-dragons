@@ -1,6 +1,6 @@
-import Characters.*;
-import Board.*;
-import Menu.Menu;
+import characters.*;
+import board.*;
+import menu.Menu;
 
 /**
  * The Game class manages the main logic of the game, including initializing the game,
@@ -145,6 +145,7 @@ public class Game {
     public void askReplay() {
         String replay = menu.replayMessage();
         if (replay.equalsIgnoreCase("Yes")) {
+            playerPosition = 1;
             mainMenu();
         } else if (replay.equalsIgnoreCase("No")) {
             exitGame();
@@ -172,15 +173,15 @@ public class Game {
                 String rollTheDiceQuestion = menu.rollTheDiceQuestion(player.getName());
 
                 switch (rollTheDiceQuestion) {
-                    case "d" -> {
+                    case "d" :
                         handleDiceRoll();
-                    }
-                    case "e" -> menu.showPlayerInfo(player); // Show the player info
-                    case "q" -> {
+
+                    case "e" : menu.showPlayerInfo(player); // Show the player info
+                    case "q" : {
                         menu.exitMessage();
                         System.exit(0); // Exit the game
                     }
-                    default -> menu.defaultMessage(); // Handle other input
+                    default : menu.defaultMessage(); // Handle other input
                 }
                 if (player.getHp() <= 0) {
                     return;

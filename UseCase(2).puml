@@ -1,0 +1,38 @@
+@startuml
+!define USECASE_COLOR #FFDDC1
+
+actor User
+
+rectangle "Game" {
+    usecase "Start Game" as U1 << (U, USECASE_COLOR) >>
+    usecase "Create Character" as U2 << (U, USECASE_COLOR) >>
+    usecase "Character Menu" as U3 << (U, USECASE_COLOR) >>
+    usecase "Throw dice" as U4 << (U, USECASE_COLOR) >>
+    usecase "View Character information" as U5 << (U, USECASE_COLOR) >>
+    usecase "Edit Character" as U6 << (U, USECASE_COLOR) >>
+    usecase "Interact with Case" as U7 << (U, USECASE_COLOR) >>
+    usecase "Empty Case" as U8 << (U, USECASE_COLOR) >>
+    usecase "Enemy Case" as U9 << (U, USECASE_COLOR) >>
+    usecase "Bonus Case" as U10 << (U, USECASE_COLOR) >>
+}
+
+User --> U1
+User --> U2
+User --> U3
+User --> U4
+User --> U7
+
+U3 --> U4
+U3 --> U5
+U3 --> U6
+
+U7 --> U8
+U7 --> U9
+U7 --> U10
+U7 --> U5
+
+U1 -down-> U2
+U2 -down-> U3
+U4 -down-> U7
+
+@enduml

@@ -1,0 +1,111 @@
+@startuml
+
+package Characters {
+    class Hero {
+        - String name
+        - int hp
+        - int attack
+        - DefensiveGear defensiveGear
+        - OffensiveGear offensiveGear
+        + void setDefensiveGear(DefensiveGear gear)
+        + void setOffensiveGear(OffensiveGear gear)
+        + String getName()
+        + int getHp()
+        + int getAttack()
+        + DefensiveGear getDefensiveGear()
+        + OffensiveGear getOffensiveGear()
+        + String getType()
+    }
+
+    class Warrior {
+        + void specialAbility()
+    }
+
+    class Enemy {
+        - String name
+        - int attack
+        - int level
+        + void interact(Hero player)
+    }
+
+    class Dragon {
+        + void interact(Hero player)
+    }
+
+    class Goblin {
+        + void interact(Hero player)
+    }
+
+    class Witch {
+        + void interact(Hero player)
+    }
+}
+
+package Gear {
+    abstract class Equipment {
+        - String name
+        - int level
+        + String getName()
+        + int getLevel()
+    }
+
+    abstract class DefensiveGear extends Equipment {
+    }
+
+    abstract class OffensiveGear extends Equipment {
+    }
+
+    class Shield {
+        - String shieldType
+    }
+
+    class HylianShield extends Shield {
+        + void interact(Hero player)
+    }
+
+    class KokiriShield extends Shield {
+        + void interact(Hero player)
+    }
+
+    class ElixirOfResilience extends DefensiveGear {
+        + void interact(Hero player)
+    }
+
+    class BiggoronSword extends OffensiveGear {
+        + void interact(Hero player)
+    }
+
+    class WoodenSword extends OffensiveGear {
+        + void interact(Hero player)
+    }
+
+    class Spell {
+        - String spellName
+        - int power
+    }
+
+    class AbraCadavra extends Spell {
+        + void interact(Hero player)
+    }
+
+    class WingardiumLeviosa extends Spell {
+        + void interact(Hero player)
+    }
+}
+
+Hero --> OffensiveGear
+Hero --> DefensiveGear
+Hero --> Warrior
+Warrior --|> Hero
+Dragon --|> Enemy
+Goblin --|> Enemy
+Witch --|> Enemy
+HylianShield --|> Shield
+KokiriShield --|> Shield
+ElixirOfResilience --|> DefensiveGear
+BiggoronSword --|> OffensiveGear
+WoodenSword --|> OffensiveGear
+AbraCadavra --|> Spell
+WingardiumLeviosa --|> Spell
+
+@enduml

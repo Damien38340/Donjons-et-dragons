@@ -1,0 +1,82 @@
+@startuml
+actor User
+
+rectangle "Hero" {
+    usecase "Use Equipment" as UC1
+    usecase "Attack" as UC2
+    usecase "Defend" as UC3
+}
+
+rectangle "Warrior" {
+    usecase "Special Ability" as UC4
+}
+
+rectangle "Wizard" {
+    usecase "Special Ability" as UC5
+}
+
+rectangle "Dragon" {
+    usecase "Interact" as UC6
+}
+rectangle "Goblin" {
+    usecase "Interact" as UC7
+}
+rectangle "Witch" {
+    usecase "Interact" as UC8
+}
+
+
+rectangle "Hylian Shield" {
+    usecase "Interact" as UC9
+}
+rectangle "Elixir of Resilience" {
+    usecase "Interact" as UC10
+}
+rectangle "Kokiri Shield" {
+    usecase "Interact" as UC11
+}
+rectangle "BarrierSpell" {
+    usecase "Interact" as UC12
+}
+
+
+
+
+rectangle "Biggoron's Sword" {
+    usecase "Interact" as UC13
+}
+rectangle "Wooden Sword" {
+    usecase "Interact" as UC14
+}
+rectangle "Abra Cadavra" {
+    usecase "Interact" as UC15
+}
+rectangle "Wingardium Leviosa" {
+    usecase "Interact" as UC16
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+
+UC1 --> UC9
+UC1 --> UC10
+UC1 --> UC11
+UC1 --> UC12
+UC1 --> UC13
+UC1 --> UC14
+UC1 --> UC15
+UC1 --> UC16
+
+UC3 --> UC9
+UC3 --> UC10
+UC3 --> UC11
+UC3 --> UC12
+
+
+
+UC2 --> UC6
+UC2 --> UC7
+UC2 --> UC8
+
+@enduml
