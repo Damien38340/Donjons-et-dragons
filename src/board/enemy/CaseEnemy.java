@@ -10,6 +10,11 @@ import characters.Hero;
  */
 public abstract class CaseEnemy implements Case {
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+
     /** The name of the enemy. */
     protected String name;
 
@@ -43,23 +48,26 @@ public abstract class CaseEnemy implements Case {
      */
     public void interact(Hero player) {
 
-        // Calculate defense and adjust player's HP
-        int defenseValue = getDefenseValue(player);
-        player.setHp(player.getHp() - (this.attack - defenseValue)); // Adjust based on player's defense
+        //Calculate player's attack and adjust enemy's HP
+        int attackValue = getAttackValue(player);
+        System.out.println("You hit the " + name + "!\n" + ANSI_GREEN + " + " + attackValue + ANSI_RESET);
+        level -= attackValue;
+        System.out.println(name + " HP: " + level);
 
-        // Display attack message
-        String attackMessage = getAttackMessage();
-        System.out.println(attackMessage);
-        System.out.println(player.getName() + " HP: " + player.getHp());
+        if (level > 0) {
+            // Calculate defense and adjust player's HP
+            int defenseValue = getDefenseValue(player);
+            player.setHp(player.getHp() - (this.attack - defenseValue)); // Adjust based on player's defense
+
+            // Display attack message
+            enemyAttack();
+            System.out.println(player.getName() + " HP: " + player.getHp() + "\n");
+        }
+
 
         // Check if player is dead
         if (player.getHp() <= 0) {
             System.out.println("You died.");
-        } else {
-            int attackValue = getAttackValue(player);
-            System.out.println("You hit the " + name + "!\n  + " + attackValue);
-            level -= attackValue;
-            System.out.println(name + " HP: " + level);
         }
     }
 
@@ -81,6 +89,11 @@ public abstract class CaseEnemy implements Case {
      */
     protected int getDefenseValue(Hero player) {
         return isDefensiveEquipmentNull(player) ? 0 : player.getDefensiveGear().getLevel();
+    }
+
+    protected void enemyAttack(){
+        System.out.println("\nThe " + getName() + getPersonalizedAttack());
+        System.out.println(ANSI_RED + " - " + attack + ANSI_RESET);
     }
 
     /**
@@ -125,10 +138,9 @@ public abstract class CaseEnemy implements Case {
     /**
      * Returns a message describing the enemy's attack, including its name and damage output.
      *
-     * @return a string message with the enemy's name and damage.
      */
-    public String getAttackMessage() {
-        return "\r\nI'm a " + name + getComplement() + "!!\n Damage - " + attack;
+    public void enemyArrival() {
+        System.out.println("\r\nI'm a " + name + getComplement() + "!!");
     }
 
     /**
@@ -138,4 +150,15 @@ public abstract class CaseEnemy implements Case {
      * @return a complementary description of the enemy.
      */
     public abstract String getComplement();
+
+    /**
+     * Returns a personalized action when the enemy attacks.
+     * Subclasses must implement this method to provide specific behavior.
+     *
+     * @return a personalized action message.
+     */
+    public abstract String getPersonalizedAttack();
+    public EnemyVisualizer getVisualizer() {
+        return this.visualizer;
+    }
 }

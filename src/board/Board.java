@@ -1,6 +1,5 @@
 package board;
 
-import board.enemy.CaseEnemy;
 import board.enemy.Dragon;
 import board.enemy.Goblin;
 import board.enemy.Witch;
@@ -25,7 +24,7 @@ import java.util.Random;
  */
 public class Board {
 
-    private ArrayList<Case> board = new ArrayList<Case>();
+    private ArrayList<Case> board = new ArrayList<>();
     private int boardSize;
 
     /**
@@ -98,12 +97,13 @@ public class Board {
     }
 
     /**
-     * Moves an enemy to a random case on the board if it is still alive.
+     * Moves an enemy to a random case on the board if it is still alive and eliminates the enemy if dead.
      *
-     * @param currentCase The current case that contains the enemy.
+     * @param enemyCase The current case that contains the enemy.
+     * @param playerPosition The case where the player is located when encountering an enemy.
      */
-    public void moveEnemyToRandomCase(Case currentCase) {
-        if (currentCase instanceof CaseEnemy enemyCase) {
+    public void moveEnemyToRandomCase(Case enemyCase, int playerPosition) {
+
             if (enemyCase.getLevel() > 0) {
                 Random random = new Random();
                 int randomIndex = random.nextInt(boardSize);
@@ -111,8 +111,8 @@ public class Board {
                 System.out.println("The " + enemyCase.getName() + " fled!!");
             } else {
                 System.out.println("You slayed the " + enemyCase.getName() + "!!");
+                board.add(playerPosition, new CaseEmpty());
             }
-        }
     }
 
     /**

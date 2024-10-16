@@ -21,17 +21,29 @@ public class Dragon extends CaseEnemy {
      */
     @Override
     public void interact(Hero player) {
-        visualizer.displayDragon();
+//        visualizer.displayDragon();
         super.interact(player);
     }
 
     /**
-     * Returns a complementary description for the Dragon's attack message.
+     * Returns a complementary description for the Dragon.
+     * This message is used to add flavor to the interaction between the Dragon and the hero.
      *
-     * @return A string with a personalized description for the Dragon's attack.
+     * @return A string with a personalized description.
      */
     @Override
     public String getComplement() {
         return " and you will burn";
     }
+
+    /**
+     * Returns a personalized action when the enemy attacks.
+     *
+     * @return A string with a personalized attack message when the Dragon attacks.
+     */
+    @Override
+    public String getPersonalizedAttack(){
+        return " breathes fire!";
+}
+
 }

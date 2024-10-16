@@ -25,18 +25,28 @@ public class Goblin extends CaseEnemy {
      */
     @Override
     public void interact(Hero player) {
-        visualizer.displayGoblin();
+//        visualizer.displayGoblin();
     super.interact(player);
     }
 
     /**
-     * Returns a personalized description for the Goblin's attack message.
+     * Returns a personalized description for the Goblin.
      * This message is used to add flavor to the interaction between the Goblin and the hero.
      *
-     * @return A string with a personalized description for the Goblin's attack.
+     * @return A string with a personalized description.
      */
     @Override
     public String getComplement() {
         return " and I'll rip you apart";
+    }
+
+    /**
+     * Returns a personalized action when the enemy attacks.
+     *
+     * @return A string with a personalized attack message when the Goblin attacks.
+     */
+    @Override
+    public String getPersonalizedAttack(){
+        return " lunges at you!";
     }
 }

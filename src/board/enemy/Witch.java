@@ -25,19 +25,31 @@ public class Witch extends CaseEnemy {
      */
     @Override
     public void interact(Hero player) {
-        visualizer.displayWitch();
+//        visualizer.displayWitch();
     super.interact(player);
     }
 
     /**
-     * Returns a personalized description for the Witch's attack message.
+     * Returns a personalized description for the Witch.
      * This message is used to add flavor to the interaction between the Witch and the hero.
      *
-     * @return A string with a personalized description for the Witch's attack.
+     * @return A string with a personalized description.
      */
     @Override
     public String getComplement() {
         return " and I curse you";
     }
+
+
+    /**
+     * Returns a personalized action when the enemy attacks.
+     *
+     * @return A string with a personalized attack message when the Witch attacks.
+     */
+@Override
+    public String getPersonalizedAttack(){
+    return " casts a hex!";
+}
+
 }
 

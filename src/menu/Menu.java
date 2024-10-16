@@ -73,11 +73,11 @@ public class Menu {
      */
     public void showTypeAnswers(String type) {
         if (type.equals("Wizard")) {
-            System.out.println("\n Oh I see... You want to be the next Harry Potter");
+            System.out.println("\n Oh I see... You want to be the next Harry Potter\n");
         } else if (type.equals("Warrior")) {
-            System.out.println("\n A " + type + " ? You don't look that strong");
+            System.out.println("\n A " + type + " ? You don't look that strong\n");
         } else {
-            System.out.println("\n A whaaaat ?? I did not get your answer, you'll be what I decide you to be");
+            System.out.println("\n A whaaaat ?? I did not get your answer, you'll be what I decide you to be\n");
         }
     }
 
@@ -186,6 +186,40 @@ public class Menu {
      */
     public void victoryMessage(Hero hero) {
         System.out.println("\n \uD83C\uDF89 Well done " + ANSI_CYAN + hero.getName() + ANSI_RESET + "! I did not believe in you but you're the proof that anything can happen \uD83C\uDF87");
+    }
+
+    /**
+     * Displays multiple choices when the player is on a case of the board
+     *
+     * @return the selected option as a String
+     */
+    public String enemyInteraction() {
+        System.out.println("1. Fight");
+        System.out.println("2. View inventory");
+        System.out.println("3. Flee");
+
+        return sc.nextLine();
+    }
+
+    public String bonusInteraction(){
+        System.out.println("1. Retrieve equipment");
+        System.out.println("2. View inventory");
+        System.out.println("3. Let it be... let it be!");
+
+        return sc.nextLine();
+    }
+
+    public void retreatPlayer(int roll) {
+        if (roll == 1) {
+            System.out.println("You have retreated " + roll + " case");
+        } else {
+            System.out.println("You have retreated " + roll + " cases");
+        }
+    }
+
+    public void updatePlayerPosition(int newPosition) {
+
+        System.out.println("You are now on case: " + newPosition);
     }
 
     /**

@@ -21,6 +21,10 @@ package Characters {
         + void specialAbility()
     }
 
+    class Wizard {
++ void specialAbility()
+    }
+
     class Enemy {
         - String name
         - int attack
@@ -71,6 +75,10 @@ package Gear {
         + void interact(Hero player)
     }
 
+    class BarrierSpell extends DefensiveGear {
+     + void interact
+     }
+
     class BiggoronSword extends OffensiveGear {
         + void interact(Hero player)
     }
@@ -95,17 +103,13 @@ package Gear {
 
 Hero --> OffensiveGear
 Hero --> DefensiveGear
-Hero --> Warrior
-Warrior --|> Hero
-Dragon --|> Enemy
-Goblin --|> Enemy
-Witch --|> Enemy
-HylianShield --|> Shield
-KokiriShield --|> Shield
-ElixirOfResilience --|> DefensiveGear
-BiggoronSword --|> OffensiveGear
-WoodenSword --|> OffensiveGear
-AbraCadavra --|> Spell
-WingardiumLeviosa --|> Spell
+Warrior --> Hero
+Wizard --> Hero
+
+Dragon --> Enemy
+Goblin --> Enemy
+Witch --> Enemy
+
+
 
 @enduml

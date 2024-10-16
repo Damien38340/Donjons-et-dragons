@@ -31,6 +31,8 @@ U7 --> U9
 U7 --> U10
 U7 --> U5
 
+U7 --> U4
+
 U1 -down-> U2
 U2 -down-> U3
 U4 -down-> U7

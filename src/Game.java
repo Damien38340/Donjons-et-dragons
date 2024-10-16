@@ -1,6 +1,11 @@
+import board.enemy.CaseEnemy;
 import characters.*;
 import board.*;
+import gear.DefensiveGear;
+import gear.OffensiveGear;
 import menu.Menu;
+
+import java.util.Currency;
 
 /**
  * The Game class manages the main logic of the game, including initializing the game,
@@ -173,15 +178,19 @@ public class Game {
                 String rollTheDiceQuestion = menu.rollTheDiceQuestion(player.getName());
 
                 switch (rollTheDiceQuestion) {
-                    case "d" :
+                    case "d":
                         handleDiceRoll();
-
-                    case "e" : menu.showPlayerInfo(player); // Show the player info
-                    case "q" : {
+                        break;
+                    case "e":
+                        menu.showPlayerInfo(player);  // Show the player info
+                        break;
+                    case "q": {
                         menu.exitMessage();
                         System.exit(0); // Exit the game
+                        break;
                     }
-                    default : menu.defaultMessage(); // Handle other input
+                    default:
+                        menu.defaultMessage(); // Handle other input
                 }
                 if (player.getHp() <= 0) {
                     return;
@@ -215,11 +224,63 @@ public class Game {
         }
 
         Case currentCase = board.getBoard().get(playerPosition);
-        currentCase.interact(player);
-        if (player.getHp() <= 0) {
-            menu.defeatMessage();
-            return;
+
+        if (currentCase instanceof CaseEnemy) {
+            ((CaseEnemy) currentCase).getVisualizer();
+            ((CaseEnemy) currentCase).enemyArrival();
+            handleEnemyInteraction(currentCase);
+            if (player.getHp() <= 0) {
+                menu.defeatMessage();
+            } else if (player.getHp() > 0 && currentCase.getLevel() > 0) { //check if neither the player nor the enemy died
+                board.moveEnemyToRandomCase(currentCase, playerPosition);
+            }
+        } else if (currentCase instanceof CaseBonus) {
+            currentCase.toString();
+            handleBonusInteraction(currentCase);
         }
-        board.moveEnemyToRandomCase(currentCase); // When player presses d
+    }
+
+    private void handleEnemyInteraction(Case currentCase) {
+        String choice = menu.enemyInteraction();
+        switch (choice) {
+            case "1":
+                currentCase.interact(player);
+                break;
+            case "2":
+                menu.showPlayerInfo(player);
+                handleEnemyInteraction(currentCase);
+                break;
+            case "3":
+                movePlayerBackRandomly(dice.roll());
+                menu.updatePlayerPosition(playerPosition);
+                break;
+            default:
+                menu.defaultMessage();
+                handleEnemyInteraction(currentCase);
+                break;
+        }
+    }
+
+    public void handleBonusInteraction(Case currentCase) {
+        String choice = menu.bonusInteraction();
+        switch (choice) {
+            case "1":
+                currentCase.interact(player);
+                break;
+            case "2":
+                menu.showPlayerInfo(player);
+                break;
+            case "3":
+                break;
+            default:
+                menu.defaultMessage();
+                handleBonusInteraction(currentCase);
+                break;
+        }
+    }
+
+    public void movePlayerBackRandomly(int roll) {
+        this.playerPosition -= roll;
+        menu.retreatPlayer(roll);
     }
 }
