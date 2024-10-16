@@ -39,7 +39,7 @@ public class BiggoronSword extends Weapon {
             // Equip the Biggoron Sword if no conditions above are met
             else {
                 player.setOffensiveGear(new BiggoronSword());
-                System.out.println("You found a Biggoron Sword !");
+                System.out.println("You have a Biggoron Sword !");
                 System.out.println("Attack + " + level);
             }
         } else {

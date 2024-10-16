@@ -24,9 +24,6 @@ public abstract class CaseEnemy implements Case {
     /** The level of the enemy. */
     protected int level;
 
-    /** A visualizer object to represent the enemy's appearance. */
-    protected EnemyVisualizer visualizer;
-
     /**
      * Constructs a CaseEnemy with the specified name, attack, and level.
      *
@@ -38,7 +35,6 @@ public abstract class CaseEnemy implements Case {
         this.name = name;
         this.attack = attack;
         this.level = level;
-        this.visualizer = new EnemyVisualizer();
     }
     /**
      * Defines the interaction between the enemy and the hero.
@@ -158,7 +154,5 @@ public abstract class CaseEnemy implements Case {
      * @return a personalized action message.
      */
     public abstract String getPersonalizedAttack();
-    public EnemyVisualizer getVisualizer() {
-        return this.visualizer;
-    }
+
 }

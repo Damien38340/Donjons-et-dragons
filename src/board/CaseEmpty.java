@@ -42,6 +42,10 @@ public class CaseEmpty implements Case {
      */
     @Override
     public void interact(Hero player) {
+    }
+
+    @Override
+    public void display() {
         System.out.println("Nothing here");
     }
 }

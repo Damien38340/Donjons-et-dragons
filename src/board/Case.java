@@ -28,4 +28,6 @@ public interface Case {
      * @return The name of the case as a String.
      */
     String getName();
+    void display();
+
 }

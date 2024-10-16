@@ -39,7 +39,7 @@ public class WoodenSword extends Weapon {
             // Equip the Wooden Sword if no conditions above are met
             else {
                 player.setOffensiveGear(this);
-                System.out.println("You found a Wooden Sword!");
+                System.out.println("You have a Wooden Sword!");
                 System.out.println("Attack + " + this.level);
             }
         } else {

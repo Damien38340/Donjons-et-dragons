@@ -39,7 +39,7 @@ public class KokiriShield extends Shield {
             // Equip the Kokiri Shield if no conditions above are met
             else {
                 player.setDefensiveGear(this);
-                System.out.println("You found a Kokiri Shield !");
+                System.out.println("You have a Kokiri Shield !");
                 System.out.println("Defense + " + this.level);
             }
         } else {

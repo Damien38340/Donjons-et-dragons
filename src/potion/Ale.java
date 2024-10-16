@@ -21,7 +21,6 @@ public class Ale extends Potion {
      */
     @Override
     public void interact(Hero player) {
-        System.out.println("You found an Ale!");
         System.out.println("Restore " + this.level + " HP");
         player.setHp(player.getHp() + this.level);
         System.out.println(player.getName() + " HP: " + player.getHp());

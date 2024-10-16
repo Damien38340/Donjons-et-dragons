@@ -225,17 +225,17 @@ public class Game {
 
         Case currentCase = board.getBoard().get(playerPosition);
 
+        currentCase.display();
+
         if (currentCase instanceof CaseEnemy) {
-            ((CaseEnemy) currentCase).getVisualizer();
             ((CaseEnemy) currentCase).enemyArrival();
             handleEnemyInteraction(currentCase);
             if (player.getHp() <= 0) {
                 menu.defeatMessage();
-            } else if (player.getHp() > 0 && currentCase.getLevel() > 0) { //check if neither the player nor the enemy died
+            } else if (player.getHp() > 0 && currentCase.getLevel() > 0 ) {//check if neither the player nor the enemy died
                 board.moveEnemyToRandomCase(currentCase, playerPosition);
             }
         } else if (currentCase instanceof CaseBonus) {
-            currentCase.toString();
             handleBonusInteraction(currentCase);
         }
     }
@@ -269,6 +269,7 @@ public class Game {
                 break;
             case "2":
                 menu.showPlayerInfo(player);
+                handleBonusInteraction(currentCase);
                 break;
             case "3":
                 break;
@@ -281,6 +282,9 @@ public class Game {
 
     public void movePlayerBackRandomly(int roll) {
         this.playerPosition -= roll;
+        if (playerPosition <= 0) {
+            playerPosition = 1;
+        }
         menu.retreatPlayer(roll);
     }
 }

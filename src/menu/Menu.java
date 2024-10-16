@@ -204,7 +204,7 @@ public class Menu {
     public String bonusInteraction(){
         System.out.println("1. Retrieve equipment");
         System.out.println("2. View inventory");
-        System.out.println("3. Let it be... let it be!");
+        System.out.println("3. Thanks... but no thanks!");
 
         return sc.nextLine();
     }

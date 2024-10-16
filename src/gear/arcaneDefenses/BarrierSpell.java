@@ -37,7 +37,7 @@ public class BarrierSpell extends ArcaneDefenses {
             // Equip the Barrier Spell if no conditions above are met
             else {
                 player.setDefensiveGear(this);
-                System.out.println("You found a Barrier Spell !");
+                System.out.println("You have a Barrier Spell !");
                 System.out.println("Defense + " + this.level);
             }
         } else {

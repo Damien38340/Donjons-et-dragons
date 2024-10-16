@@ -39,7 +39,7 @@ public class HylianShield extends Shield {
             // Equip the Hylian Shield if no conditions above are met
             else {
                 player.setDefensiveGear(this);
-                System.out.println("You found an Hylian Shield !");
+                System.out.println("You have an Hylian Shield !");
                 System.out.println("Defense + " + this.level);
             }
         } else {

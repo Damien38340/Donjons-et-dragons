@@ -40,7 +40,7 @@ public class ElixirOfResilience extends ArcaneDefenses {
             // Equip the Elixir if no conditions above are met
             else {
                 player.setDefensiveGear(this);
-                System.out.println("You found an Elixir of Resilience !");
+                System.out.println("You have an Elixir of Resilience !");
                 System.out.println("Defense + " + this.level);
             }
         } else {

@@ -59,4 +59,10 @@ public class Potion extends CaseBonus {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public void display() {
+        System.out.println("You found " + this.name);
+
+    }
 }
