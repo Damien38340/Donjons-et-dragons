@@ -13,7 +13,7 @@ public class Goblin extends CaseEnemy {
      * The Goblin has an attack strength of 1 and a level (HP) of 6.
      */
     public Goblin() {
-        super("Goblin", 1, 6);
+        super("Goblin", 1, 10);
     }
 
     /**

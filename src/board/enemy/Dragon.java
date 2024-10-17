@@ -13,7 +13,7 @@ public class Dragon extends CaseEnemy {
      * The Dragon has an attack strength of 4 and a level (HP) of 15.
      */
     public Dragon() {
-        super("Dragon", 4, 15);
+        super("Dragon", 4, 20);
     }
 
     /**

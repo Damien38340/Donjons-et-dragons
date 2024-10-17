@@ -99,20 +99,29 @@ public class Board {
     /**
      * Moves an enemy to a random case on the board if it is still alive and eliminates the enemy if dead.
      *
-     * @param enemyCase The current case that contains the enemy.
-     * @param playerPosition The case where the player is located when encountering an enemy.
+     * @param enemyCase      The current case that contains the enemy.
      */
-    public void moveEnemyToRandomCase(Case enemyCase, int playerPosition) {
+    public void moveEnemyToRandomCase(Case enemyCase) {
 
-            if (enemyCase.getLevel() > 0) {
-                Random random = new Random();
-                int randomIndex = random.nextInt(boardSize);
-                board.set(randomIndex, enemyCase); // Move the enemy to a random position
-                System.out.println("The " + enemyCase.getName() + " fled!!");
-            } else {
-                System.out.println("You slayed the " + enemyCase.getName() + "!!");
-                board.add(playerPosition, new CaseEmpty());
-            }
+        if (enemyCase.getLevel() > 0) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(boardSize);
+            board.set(randomIndex, enemyCase); // Move the enemy to a random position
+            System.out.println("The " + enemyCase.getName() + " fled!!");
+        }
+    }
+
+    /**
+     * Removes the enemy from the board and replaces its position with an empty case.
+     *
+     * @param enemyCase The case object that represents the enemy.
+     * @param playerPosition The index on the board where the enemy was encountered.
+     */
+    public void handleEnemyDefeat(Case enemyCase, int playerPosition) {
+        if (enemyCase.getLevel() <= 0){
+            System.out.println("You slayed the " + enemyCase.getName() + "!!");
+            board.add(playerPosition, new CaseEmpty());
+        }
     }
 
     /**

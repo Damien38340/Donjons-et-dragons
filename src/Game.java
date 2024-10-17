@@ -1,11 +1,7 @@
 import board.enemy.CaseEnemy;
 import characters.*;
 import board.*;
-import gear.DefensiveGear;
-import gear.OffensiveGear;
 import menu.Menu;
-
-import java.util.Currency;
 
 /**
  * The Game class manages the main logic of the game, including initializing the game,
@@ -232,8 +228,14 @@ public class Game {
             handleEnemyInteraction(currentCase);
             if (player.getHp() <= 0) {
                 menu.defeatMessage();
-            } else if (player.getHp() > 0 && currentCase.getLevel() > 0 ) {//check if neither the player nor the enemy died
-                board.moveEnemyToRandomCase(currentCase, playerPosition);
+            } else if (player.getHp() > 0) {//check if neither the player nor the enemy died
+                if (currentCase.getLevel() < 5) {
+                    board.moveEnemyToRandomCase(currentCase);
+                    board.handleEnemyDefeat(currentCase, playerPosition);
+                } else {
+                    handleEnemyInteraction(currentCase);
+                    board.handleEnemyDefeat(currentCase, playerPosition);
+                }
             }
         } else if (currentCase instanceof CaseBonus) {
             handleBonusInteraction(currentCase);
@@ -253,6 +255,7 @@ public class Game {
             case "3":
                 movePlayerBackRandomly(dice.roll());
                 menu.updatePlayerPosition(playerPosition);
+                play();
                 break;
             default:
                 menu.defaultMessage();

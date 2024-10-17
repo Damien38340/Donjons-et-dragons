@@ -13,7 +13,7 @@ public class Witch extends CaseEnemy {
      * The Witch has an attack strength of 2 and a level (HP) of 9.
      */
     public Witch() {
-        super("Witch", 2, 9);
+        super("Witch", 2, 14);
     }
 
     /**
