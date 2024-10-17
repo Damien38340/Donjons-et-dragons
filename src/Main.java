@@ -12,6 +12,9 @@ public class Main {
      * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
+
+        MySQLTest.main(args);
+
         Game game = new Game();
 
         // Initialize and start the game

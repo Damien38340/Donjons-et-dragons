@@ -240,4 +240,16 @@ public class Menu {
         System.out.println("Press " + ANSI_RED + "No " + ANSI_RESET + "to hit the road");
         return sc.nextLine();
     }
+
+    public String askingToSaveCharacter(){
+        System.out.println("Do you wish to save your character ?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+
+        return sc.nextLine();
+    }
+
+    public void displayHeroes() {
+
+    }
 }

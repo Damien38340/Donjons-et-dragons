@@ -3,6 +3,8 @@ import characters.*;
 import board.*;
 import menu.Menu;
 
+import java.util.ArrayList;
+
 /**
  * The Game class manages the main logic of the game, including initializing the game,
  * managing the player character, and controlling the game flow.
@@ -70,7 +72,18 @@ public class Game {
             player = new Wizard(userName, type);
         }
         menu.showTypeAnswers(type);
+        saveCharacter();
         showCharacterMenu();
+    }
+
+    public void saveCharacter() {
+        String choice = menu.askingToSaveCharacter();
+
+        if (choice.equals("1")) {
+            MySQLTest.createHero(player);  // Save the player's character in the database
+        } else {
+            System.out.println("Character not saved.");
+        }
     }
 
     /**
