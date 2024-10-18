@@ -1,6 +1,7 @@
 package menu;
 
 import characters.Hero;
+import database.DataBase;
 
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class Menu {
 
     private final Scanner sc;
+    private DataBase dataBase;
 
     // ANSI escape codes for colored text output in the console
     public static final String ANSI_RESET = "\u001B[0m";
@@ -32,8 +34,10 @@ public class Menu {
      * @return the selected option as a String
      */
     public String showMainMenu() {
-        System.out.println("1. New character");
-        System.out.println("2. Exit");
+        System.out.println("1. New hero");
+        System.out.println("2. Choose a hero");
+        System.out.println("3. Exit");
+
         return sc.nextLine();
     }
 
@@ -243,13 +247,15 @@ public class Menu {
 
     public String askingToSaveCharacter(){
         System.out.println("Do you wish to save your character ?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
+        System.out.println("Yes");
+        System.out.println("No");
 
         return sc.nextLine();
     }
+    public String listOfHeroes(DataBase dataBase){
+        dataBase.getHeroes();
+        System.out.println("\n\n Type the ID to choose your character");
 
-    public void displayHeroes() {
-
+        return sc.nextLine();
     }
 }

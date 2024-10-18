@@ -1,9 +1,8 @@
 import board.enemy.CaseEnemy;
 import characters.*;
 import board.*;
+import database.DataBase;
 import menu.Menu;
-
-import java.util.ArrayList;
 
 /**
  * The Game class manages the main logic of the game, including initializing the game,
@@ -16,6 +15,7 @@ public class Game {
     private Menu menu; // The menu for user interactions
     private Board board; // The game board
     private Dice dice; // The dice used for rolling
+    private DataBase dataBase;
 
     /**
      * Initializes a new Game instance, creating a new board and dice.
@@ -23,6 +23,7 @@ public class Game {
     public Game() {
         this.board = new Board();
         this.dice = new Dice();
+        this.dataBase = new DataBase();
     }
 
     /**
@@ -39,13 +40,44 @@ public class Game {
     public void mainMenu() {
         String mainMenuChoice = menu.showMainMenu();
 
-        if (mainMenuChoice.equals("1")) {
-            createNewCharacter();
-        } else if (mainMenuChoice.equals("2")) {
-            exitGame();
+        switch (mainMenuChoice) {
+
+            case "1":
+                createNewCharacter();
+            case "2": {
+                menu.listOfHeroes(dataBase);
+                chooseYourHero();
+                showCharacterMenu();
+            }
+            case "3":
+                exitGame();
+            default: {
+                menu.defaultMessage();
+                mainMenu();
+            }
+        }
+    }
+
+    public void chooseYourHero() {
+        String heroChoice = menu.listOfHeroes(dataBase);
+
+        int chosenHeroId;
+        try {
+            chosenHeroId = Integer.parseInt(heroChoice);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+            return;  // Exit or allow re-entry in case of invalid input
+        }
+
+        Hero chosenHero = dataBase.getHeroById(chosenHeroId, player);
+        player = chosenHero;
+
+        if (chosenHero != null) {
+            System.out.println("You have selected: " + chosenHero.getName());
+            // Proceed with the game logic for the selected hero
         } else {
-            menu.defaultMessage();
-            mainMenu();
+            System.out.println("Hero with ID " + chosenHeroId + " not found. Please try again.");
+            // Optionally, loop back to let the player choose again
         }
     }
 
@@ -79,10 +111,13 @@ public class Game {
     public void saveCharacter() {
         String choice = menu.askingToSaveCharacter();
 
-        if (choice.equals("1")) {
-            MySQLTest.createHero(player);  // Save the player's character in the database
-        } else {
+        if (choice.equalsIgnoreCase("Yes")) {
+            dataBase.createHero(player);  // Save the player's character in the database
+        } else if (choice.equalsIgnoreCase("No")) {
             System.out.println("Character not saved.");
+        } else {
+            menu.defaultMessage();
+            saveCharacter();
         }
     }
 

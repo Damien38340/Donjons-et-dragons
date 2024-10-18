@@ -1,33 +1,26 @@
+package database;
+
 import characters.Hero;
+import characters.Warrior;
+import characters.Wizard;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-public class MySQLTest {
+public class DataBase {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dungeons-and-dragons";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
-
-    public static void main(String[] args) {
+    private final String DB_URL = "jdbc:mysql://localhost:3306/dungeons-and-dragons";
+    private final String USER = "root";
+    private final String PASSWORD = "";
 
 
-        try {
-            // Establishing a connection
-            Connection conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);
-            System.out.println("Connection established successfully!");
-
-            conn.close(); // Close the connection
-        } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
-        }
+    public Connection getConnection() throws SQLException {
+       return DriverManager.getConnection(DB_URL,USER,PASSWORD);
     }
 
-    public static void getHeroes() {
-        ArrayList<Hero> heroes = new ArrayList<>();
+    public void getHeroes() {
         String query = "SELECT * FROM hero";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -46,25 +39,52 @@ public class MySQLTest {
                 System.out.printf("ID: %d, Type: %s, Name: %s, Health Level: %d, Strength Level: %d, Weapon/Spell: %s, Shield: %s%n",
                         id, type, name, healthLevel, strengthLevel, weaponOrSpell, shield);
             }
-
         } catch (SQLException e) {
             System.out.println("Error retrieving heroes: " + e.getMessage());
         }
     }
 
+    public Hero getHeroById(int heroId, Hero player) {
+        String query = "SELECT * FROM hero WHERE Id = ?";  // SQL query to get a hero by ID
 
-    public static void createHero(Hero hero) {
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, heroId);  // Set the hero ID parameter
+            ResultSet rs = stmt.executeQuery();
+
+            // If the hero exists, return the corresponding Hero object
+            if (rs.next()) {
+                String type = rs.getString("Type");
+                String name = rs.getString("Name");
+
+                // Create and return the Hero object
+                if (type.equalsIgnoreCase("warrior")) {
+                    return player = new Warrior(name, type);
+                }
+                return player = new Wizard(name, type);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error retrieving hero: " + e.getMessage());
+        }
+        // Return null if no hero is found
+        return null;
+    }
+
+
+    public void createHero(Hero hero) {
         String query = "INSERT INTO Hero (Type, Name, HealthLevel, StrengthLevel, WeaponSpell, Shield) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, hero.getType());
             stmt.setString(2, hero.getName());
             stmt.setInt(3, hero.getHp());
             stmt.setInt(4, hero.getAttack());
-            stmt.setString(5, hero.getOffensiveGear().toString());
-            stmt.setString(6, hero.getDefensiveGear().toString());
+            stmt.setString(5, hero.getOffensiveGear() != null ? hero.getOffensiveGear().getName() : null);
+            stmt.setString(6, hero.getDefensiveGear() != null ? hero.getDefensiveGear().getName() : null);
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -76,10 +96,10 @@ public class MySQLTest {
         }
     }
 
-    public static void editHero(Hero hero) {
+    public void editHero(Hero hero) {
         String query = "UPDATE Hero SET Type = ?, Name = ?, HealthLevel = ?, StrengthLevel = ?, WeaponSpell = ?, Shield = ? WHERE Id = ?";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, hero.getType());
