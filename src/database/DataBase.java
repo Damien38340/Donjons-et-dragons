@@ -119,7 +119,6 @@ public class DataBase {
             stmt.setInt(4, hero.getAttack());
             stmt.setString(5, hero.getOffensiveGear() != null ? hero.getOffensiveGear().getName() : null);
             stmt.setString(6, hero.getDefensiveGear() != null ? hero.getDefensiveGear().getName() : null);
-            stmt.setInt(7, hero.getId());
 
 
             int rowsInserted = stmt.executeUpdate();

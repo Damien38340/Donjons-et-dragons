@@ -17,14 +17,6 @@ public class Dragon extends CaseEnemy {
     }
 
     /**
-     * Overrides the visualizer display.
-     */
-    @Override
-    public void interact(Hero player) {
-        super.interact(player);
-    }
-
-    /**
      * Returns a complementary description for the Dragon.
      * This message is used to add flavor to the interaction between the Dragon and the hero.
      *

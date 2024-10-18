@@ -17,18 +17,6 @@ public class Witch extends CaseEnemy {
     }
 
     /**
-     * Defines the interaction between the Witch and the hero.
-     * The Witch attacks the hero, reducing the hero's HP based on the Witch's attack value and the hero's defense.
-     * The hero can counter-attack, reducing the Witch's level (HP). If the hero's HP reaches zero or below, they die.
-     *
-     * @param player The hero interacting with the Witch.
-     */
-    @Override
-    public void interact(Hero player) {
-    super.interact(player);
-    }
-
-    /**
      * Returns a personalized description for the Witch.
      * This message is used to add flavor to the interaction between the Witch and the hero.
      *

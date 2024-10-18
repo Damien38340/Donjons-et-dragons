@@ -272,7 +272,6 @@ public class Game {
         }
 
         if (playerPosition == board.getBoardSize()) {
-            playerPosition = 1;
             menu.victoryMessage(player);
         }
     }
