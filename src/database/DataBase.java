@@ -14,7 +14,7 @@ public class DataBase {
 
 
     public Connection getConnection() throws SQLException {
-       return DriverManager.getConnection(DB_URL,USER,PASSWORD);
+        return DriverManager.getConnection(DB_URL, USER, PASSWORD);
     }
 
     public void getHeroes() {
@@ -24,7 +24,7 @@ public class DataBase {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
-            System.out.println("List of Heroes:");
+            System.out.println("\nList of Heroes:\n");
             while (rs.next()) {
                 // Retrieve values from the ResultSet
                 int id = rs.getInt("Id");
@@ -57,12 +57,46 @@ public class DataBase {
             if (rs.next()) {
                 String type = rs.getString("Type");
                 String name = rs.getString("Name");
+                int healthLevel = rs.getInt("HealthLevel");
+                int strengthLevel = rs.getInt("StrengthLevel");
+                int id = rs.getInt("Id");
 
                 // Create and return the Hero object
                 if (type.equalsIgnoreCase("warrior")) {
-                    return player = new Warrior(name, type);
+                    return player = new Warrior(name, type, healthLevel, strengthLevel, id);
                 }
-                return player = new Wizard(name, type);
+                return player = new Wizard(name, type, healthLevel, strengthLevel, id);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error retrieving hero: " + e.getMessage());
+        }
+        // Return null if no hero is found
+        return null;
+    }
+
+    public Hero getHeroByName(String heroName, Hero player) {
+        String query = "SELECT * FROM hero WHERE Name = ?";  // SQL query to get a hero by Name
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, heroName); // Set the hero name parameter
+            ResultSet rs = stmt.executeQuery();
+
+            // If the hero exists, return the corresponding Hero object
+            if (rs.next()) {
+                String type = rs.getString("Type");
+                String name = rs.getString("Name");
+                int healthLevel = rs.getInt("HealthLevel");
+                int strengthLevel = rs.getInt("StrengthLevel");
+                int id = rs.getInt("Id");
+
+                // Create and return the Hero object
+                if (type.equalsIgnoreCase("warrior")) {
+                    return player = new Warrior(name, type, healthLevel, strengthLevel, id);
+                }
+                return player = new Wizard(name, type, healthLevel, strengthLevel, id);
             }
 
         } catch (SQLException e) {
@@ -85,6 +119,8 @@ public class DataBase {
             stmt.setInt(4, hero.getAttack());
             stmt.setString(5, hero.getOffensiveGear() != null ? hero.getOffensiveGear().getName() : null);
             stmt.setString(6, hero.getDefensiveGear() != null ? hero.getDefensiveGear().getName() : null);
+            stmt.setInt(7, hero.getId());
+
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -106,8 +142,9 @@ public class DataBase {
             stmt.setString(2, hero.getName());
             stmt.setInt(3, hero.getHp());
             stmt.setInt(4, hero.getAttack());
-            stmt.setString(5, hero.getOffensiveGear().toString());
-            stmt.setString(6, hero.getDefensiveGear().toString());
+            stmt.setString(5, hero.getOffensiveGear() != null ? hero.getOffensiveGear().getName() : null);
+            stmt.setString(6, hero.getDefensiveGear() != null ? hero.getDefensiveGear().getName() : null);
+            stmt.setInt(7, hero.getId());
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {

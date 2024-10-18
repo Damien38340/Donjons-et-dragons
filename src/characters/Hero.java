@@ -17,6 +17,8 @@ public abstract class Hero {
     private int defense;            // The defense power of the hero
     private OffensiveGear offensiveGear; // The offensive gear equipped by the hero
     private DefensiveGear defensiveGear; // The defensive gear equipped by the hero
+    private int id;  // Adding ID field
+
 
     /**
      * Default constructor that initializes the hero with an empty name.
@@ -57,6 +59,24 @@ public abstract class Hero {
         this.type = type;
         this.defense = defense;
     }
+    /**
+     * Constructs a Hero with a specified name, type, hp and attack value.
+     * It is used to retrieve information of the hero from the database
+     *
+     * @param name The name of the hero
+     * @param type The type or class of the hero
+     * @param hp The defense value of the hero
+     * @param attack The attack value of the hero
+     */
+    protected Hero(String name, String type, int hp, int attack, int id) {
+        this.name = name;
+        this.type = type;
+        this.hp = hp;
+        this.attack = attack;
+        this.id = id;
+    }
+
+
 
     /**
      * Gets the health points of the hero.
@@ -182,6 +202,14 @@ public abstract class Hero {
      */
     public void setDefense(int defense) {
         this.defense = defense;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

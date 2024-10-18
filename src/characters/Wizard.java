@@ -27,6 +27,23 @@ public class Wizard extends Hero {
     }
 
     /**
+     * Constructs a Wizard with a specified name, type, hp and attack.
+     * Initializes the hero's health points and attack from the database.
+     * and sets the defense based on the equipped defensive gear if available.
+     *
+     * @param name The name of the Wizard
+     * @param type The type or class of the Wizard
+     * @param healthLevel The hp value of the Wizard
+     * @param strengthLevel The attack value of the Wizard
+     */
+    public Wizard(String name, String type, int healthLevel, int strengthLevel, int id) {
+    super(name, type, healthLevel, strengthLevel, id);
+        if (getDefensiveGear() != null) {
+            this.setDefense(getDefensiveGear().getLevel());
+        }
+    }
+
+    /**
      * Generates a random health points value for the Wizard.
      * The random value will be between 3 and 6, inclusive.
      *

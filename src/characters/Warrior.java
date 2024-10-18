@@ -27,6 +27,23 @@ public class Warrior extends Hero {
     }
 
     /**
+     * Constructs a Warrior with a specified name, type, hp and attack.
+     * Initializes the hero's health points and attack from the database.
+     * and sets the defense based on the equipped defensive gear if available.
+     *
+     * @param name The name of the Warrior
+     * @param type The type or class of the Warrior
+     * @param healthLevel The hp value of the Warrior
+     * @param strengthLevel The attack value of the Warrior
+     */
+    public Warrior(String name, String type, int healthLevel, int strengthLevel, int id) {
+        super(name, type, healthLevel, strengthLevel, id);
+        if (getDefensiveGear() != null) {
+            this.setDefense(getDefensiveGear().getLevel());
+        }
+    }
+
+    /**
      * Generates a random level for the Warrior's health points and attack.
      * The random level will be between 5 and 10, inclusive.
      *

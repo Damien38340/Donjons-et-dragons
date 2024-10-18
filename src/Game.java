@@ -44,40 +44,49 @@ public class Game {
 
             case "1":
                 createNewCharacter();
+                break;
             case "2": {
-                menu.listOfHeroes(dataBase);
                 chooseYourHero();
                 showCharacterMenu();
+                break;
             }
             case "3":
                 exitGame();
+                break;
             default: {
                 menu.defaultMessage();
                 mainMenu();
+                break;
             }
         }
     }
 
     public void chooseYourHero() {
-        String heroChoice = menu.listOfHeroes(dataBase);
 
-        int chosenHeroId;
-        try {
-            chosenHeroId = Integer.parseInt(heroChoice);
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid number.");
-            return;  // Exit or allow re-entry in case of invalid input
-        }
+        boolean validSelection = false; // Track if the selection is valid
 
-        Hero chosenHero = dataBase.getHeroById(chosenHeroId, player);
-        player = chosenHero;
+        while (!validSelection) {
+            String heroChoice = menu.listOfHeroes(dataBase);
 
-        if (chosenHero != null) {
-            System.out.println("You have selected: " + chosenHero.getName());
-            // Proceed with the game logic for the selected hero
-        } else {
-            System.out.println("Hero with ID " + chosenHeroId + " not found. Please try again.");
-            // Optionally, loop back to let the player choose again
+            int chosenHeroId;
+            try {
+                chosenHeroId = Integer.parseInt(heroChoice);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                continue;  // Exit or allow re-entry in case of invalid input
+            }
+
+            Hero chosenHero = dataBase.getHeroById(chosenHeroId, player);
+
+            if (chosenHero != null) {
+                player = chosenHero;
+                System.out.println("You have selected: " + chosenHero.getName() +"\n");
+                validSelection = true;
+                // Proceed with the game logic for the selected hero
+            } else {
+                System.out.println("\nHero with ID " + chosenHeroId + " not found. Please try again.\n");
+                // Optionally, loop back to let the player choose again
+            }
         }
     }
 
@@ -129,12 +138,14 @@ public class Game {
      */
     private Hero editCharacter(Hero player) {
         String choice = menu.showCharacterEditionMenu();
+        Hero chosenHero = dataBase.getHeroByName(player.getName(), player);
 
         switch (choice) {
             case "1":
                 String newName = menu.editName();
                 player.setName(newName);
-                break;
+
+            break;
 
             case "2":
                 String newType = menu.editType();
@@ -143,7 +154,7 @@ public class Game {
                 } else {
                     player = new Wizard(player.getName(), newType);
                 }
-                break;
+            break;
             case "3":
                 showCharacterMenu();
                 break;
@@ -151,7 +162,23 @@ public class Game {
                 menu.defaultMessage();
                 break;
         }
+        if (chosenHero != null){
+            saveChanges();
+        }
         return player;
+    }
+
+    public void saveChanges() {
+        String choice = menu.askingToSaveChanges();
+
+        if (choice.equalsIgnoreCase("Yes")) {
+            dataBase.editHero(player);
+        } else if (choice.equalsIgnoreCase("No")) {
+            System.out.println("Changes not saved.");
+        } else {
+            menu.defaultMessage();
+            saveCharacter();
+        }
     }
 
     /**

@@ -252,6 +252,16 @@ public class Menu {
 
         return sc.nextLine();
     }
+
+    public String askingToSaveChanges(){
+        System.out.println("Do you wish to save your changes ?");
+        System.out.println("Yes");
+        System.out.println("No");
+
+        return sc.nextLine();
+    }
+
+
     public String listOfHeroes(DataBase dataBase){
         dataBase.getHeroes();
         System.out.println("\n\n Type the ID to choose your character");
