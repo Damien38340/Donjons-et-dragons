@@ -59,9 +59,9 @@ public class DataBase {
     public Hero getHeroById(int heroId, Hero player) {
         String query = "SELECT * FROM hero WHERE Id = ?";  // SQL query to get a hero by ID
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
+        try {
+            Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, heroId);  // Set the hero ID parameter
             ResultSet rs = stmt.executeQuery();
 
@@ -79,10 +79,12 @@ public class DataBase {
                 }
                 return player = new Wizard(name, type, healthLevel, strengthLevel, id);
             }
+            conn.close();
 
         } catch (SQLException e) {
             System.out.println("Error retrieving hero: " + e.getMessage());
         }
+
         // Return null if no hero is found
         return null;
     }
@@ -90,6 +92,8 @@ public class DataBase {
     public Hero getHeroByName(String heroName, Hero player) {
         String query = "SELECT * FROM hero WHERE Name = ?";  // SQL query to get a hero by Name
 
+        // Support for try-with-resources — introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.
+        //The resources declared need to implement the AutoCloseable interface.
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
