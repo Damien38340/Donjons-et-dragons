@@ -263,6 +263,7 @@ public class Menu {
 
 
     public String listOfHeroes(DataBase dataBase){
+        System.out.println("\nList of Heroes:\n");
         dataBase.getHeroes();
         System.out.println("\n\n Type the ID to choose your character");
 

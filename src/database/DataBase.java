@@ -20,28 +20,40 @@ public class DataBase {
     public void getHeroes() {
         String query = "SELECT * FROM hero";
 
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        try {
+            Connection conn = getConnection();
 
-            System.out.println("\nList of Heroes:\n");
-            while (rs.next()) {
-                // Retrieve values from the ResultSet
-                int id = rs.getInt("Id");
-                String type = rs.getString("Type");
-                String name = rs.getString("Name");
-                int healthLevel = rs.getInt("HealthLevel");
-                int strengthLevel = rs.getInt("StrengthLevel");
-                String weaponOrSpell = rs.getString("WeaponSpell");
-                String shield = rs.getString("Shield");
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
 
-                // Print hero details
-                System.out.printf("ID: %d, Type: %s, Name: %s, Health Level: %d, Strength Level: %d, Weapon/Spell: %s, Shield: %s%n",
-                        id, type, name, healthLevel, strengthLevel, weaponOrSpell, shield);
+                while (rs.next()) {
+                    // Retrieve values from the ResultSet
+                    int id = rs.getInt("Id");
+                    String type = rs.getString("Type");
+                    String name = rs.getString("Name");
+                    int healthLevel = rs.getInt("HealthLevel");
+                    int strengthLevel = rs.getInt("StrengthLevel");
+                    String weaponOrSpell = rs.getString("WeaponSpell");
+                    String shield = rs.getString("Shield");
+
+                    // Print hero details
+                    System.out.printf("ID: %d, Type: %s, Name: %s, Health Level: %d, Strength Level: %d, Weapon/Spell: %s, Shield: %s%n",
+                            id, type, name, healthLevel, strengthLevel, weaponOrSpell, shield);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error retrieving heroes: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
-        } catch (SQLException e) {
-            System.out.println("Error retrieving heroes: " + e.getMessage());
+            finally {
+                conn.close();
+            }
         }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
 
     public Hero getHeroById(int heroId, Hero player) {
